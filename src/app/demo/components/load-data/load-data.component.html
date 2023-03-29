@@ -1,0 +1,68 @@
+<style>
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th , td  {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+    table tr:nth-child(odd) {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+    table tr:nth-child(even) {
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    </style>
+
+<table class="table-stats">
+    <tr>
+        <th>Sr</th>
+        <th>Health Facility</th>
+        <th>Doctor</th>
+        <th>Nurse</th>
+        <th>Naib Qasid</th>
+        <th>Total</th>
+    </tr>
+    <tr class="cursor-p" *ngFor="let vp of vpMap; let i=index" >
+        <td>
+            <p class="m-0 cursor-p hover-success text-medium" (click)="selectMarker(vp, vp.Code, 'id')">
+                {{i+1}}
+            </p>
+        </td>
+        <td>
+            <p class="m-0 cursor-p hover-success text-medium" (click)="selectMarker(vp, vp.Code, 'Health Facility')">
+                {{vp.id}}
+            </p>
+        </td>
+        <td>
+            <p class="m-0 cursor-p hover-success text-medium" (click)="selectMarker(vp, vp.Code, 'Doctor')">
+                {{vp.Doctor}}
+            </p>
+        </td>
+        <td>
+            <p class="m-0 cursor-p hover-success text-medium" (click)="selectMarker(vp, vp.Code, 'Nurse')">
+                {{vp.Nurse}}
+            </p>
+        </td>
+        
+        <td>
+            <p class="m-0 cursor-p hover-success text-medium" (click)="selectMarker(vp, vp.Code, 'NaibQasid')">
+                {{vp.NaibQasid}} 
+            </p> 
+        </td>
+        <td>
+            <p class="m-0 cursor-p hover-success text-medium" (click)="selectMarker(vp, vp.Code, 'Total')">
+                 {{vp.Total}} 
+            </p> 
+        </td>
+    </tr>
+</table>

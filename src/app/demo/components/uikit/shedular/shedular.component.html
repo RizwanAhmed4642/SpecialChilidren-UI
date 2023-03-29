@@ -1,0 +1,218 @@
+<div class="card">
+    <i (click)="toggle()" *ngIf="this.isToggle" class="pi pi-chevron-down"
+        style="text-align: right;font-size: 1.5rem;"></i>
+    <i (click)="toggle()" *ngIf="!this.isToggle" class="pi pi-chevron-up"
+        style="text-align: right;font-size: 1.5rem;"></i>
+    <br *ngIf="!this.isToggle">
+    <div class="col-12">
+
+
+        <div *ngIf="this.isToggle" class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-4">
+                <label htmlFor="calendar"><b>Calendar</b></label>
+                <p-calendar view="month" dateFormat="mm/yy" [(ngModel)]="RosterDate"
+                    (onSelect)="dropdownValueChanged(RosterDate, 'date')" [readonlyInput]="false" inputId="pickmonth"
+                    placeholder="Pick any month"></p-calendar>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label htmlFor="state"><b>Division</b></label>
+                <p-dropdown [options]="this.divisions" 
+                    (onChange)="dropdownValueChanged($event.value, 'Div')" optionLabel="Name"
+                    placeholder={{placeHolderDivision}}
+                    [(ngModel)]="this.divisionsData"></p-dropdown>
+
+            </div>
+            <div class="field col-12 md:col-4">
+                <label htmlFor="state"><b>District</b></label>
+                <p-dropdown [options]="this.districts"
+                    (onChange)="dropdownValueChanged($event.value, 'Dis')" optionLabel="Name"
+                    placeholder={{placeHolderDistrict}}
+                    [(ngModel)]="this.districtsData"></p-dropdown>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label htmlFor="state"><b>Tehsil</b></label>
+                <p-dropdown  [options]="this.tehsils" placeholder={{placeHolderTehsil}}
+                    (onChange)="dropdownValueChanged($event.value, 'Teh')" optionLabel="Name"
+                    [(ngModel)]="this.tehsilsData"></p-dropdown>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label htmlFor="state"><b>Health Facility Type</b></label>
+                <p-dropdown [options]="this.hfTypes" placeholder={{placeHolderHFType}}
+                    (onChange)="dropdownValueChanged($event.value, 'bhu')" optionLabel="Name"
+                    [(ngModel)]="this.HfTypesData"></p-dropdown>
+            </div>
+            <div *ngIf="isShowHfType"
+                class="field col-12 md:col-4">
+                <label htmlFor="state"><b>Basic Health Unit</b></label>
+                <p-dropdown  [options]="this.BasicHealthUnit" placeholder={{placeHolderBHU}}
+                    (onChange)="dropdownValueChanged($event.value, 'hft')" optionLabel="Name"
+                    [(ngModel)]="this.BasicHealthUnitType"></p-dropdown>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label htmlFor="state"><b>Health Facility</b></label>
+                <p-dropdown [options]="this.healthFacilities" placeholder={{placeHolderHf}}
+                    (onChange)="dropdownValueChanged($event.value, 'hf')" optionLabel="FullName"
+                    [(ngModel)]="this.healthFacilitiesData"></p-dropdown>
+            </div>
+
+
+            <div class="field col-12 md:col-4">
+                <label htmlFor="state"><b>Designation</b></label>
+                <p-dropdown [options]="this.designation" placeholder="Select designation" optionLabel="Name"
+                    (onChange)="dropdownValueChanged($event.value, 'des')" [(ngModel)]="this.designationData">
+                </p-dropdown>
+            </div>
+            <div *ngIf="this.IsShowPdf" class="field col-12 md:col-2">
+                <label htmlFor="state"><b>PDF Export</b></label>
+                <button (click)="exportPdf()" pButton pRipple label="Export to pdf"></button>
+            </div>
+            <div class="field col-12 md:col-2">
+                <label htmlFor="state"><b>Excel Export</b></label>
+                <button (click)="exportTableToExcel('tblData','rosterData')" pButton pRipple
+                    label="Export to Excel"></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" *ngFor="let list of AllShiftsCurrent">
+                <div *ngIf="list.ShiftName == 'Morning'"><b>{{list.ShiftName}}:<br><small>{{list.ShiftStart | date: 'h:mm a'}} To {{list.ShiftEnd | date: 'h:mm a'}}</small></b>&nbsp;<span style="width:50px; height:20px ;"
+                    class="_green"></span></div>
+                <div *ngIf="list.ShiftName == 'Evening'"><b>{{list.ShiftName}}:<br><small>{{list.ShiftStart | date: 'h:mm a'}} To {{list.ShiftEnd | date: 'h:mm a'}}</small></b>&nbsp;<span style="width:50px; height:20px;background-color: rgb(253,234,182); display: inline-grid;"
+                   ></span></div>
+                <div *ngIf="list.ShiftName == 'Night'"><b>{{list.ShiftName}}:<br><small>{{list.ShiftStart | date: 'h:mm a'}} To {{list.ShiftEnd | date: 'h:mm a'}}</small></b>&nbsp;<span style="width:50px; height:20px ;"
+                    class="blue"></span></div>
+                <div *ngIf="list.ShiftName.includes('Special')"><b>{{list.ShiftName}}:<br><small>{{list.ShiftStart | date: 'h:mm a'}} To {{list.ShiftEnd | date: 'h:mm a'}}</small></b>&nbsp;<span style="width:50px; height:20px ;background-color: rgba(196, 192, 109, 0.326);"></span></div>
+            </div>
+            <!-- <div class="col">
+                <div class="color" style="display:flex"><b>Morning:<br><small>8:00AM To 2:00PM</small></b>&nbsp;<span style="width:50px; height:20px ;"
+                        class="_green"></span></div>
+            </div>
+            <div class="col">
+                <div class="color" style="display:flex"> <b>Evening:<br><small>2:00PM To 8:00PM</small></b>&nbsp;<span style="width:25px; height:20px ;"
+                    class="red"></span></div>
+            </div>
+            <div class="col">
+                <div class="color" style="display:flex"><b>Night:<br><small>08:00PM To 8:00AM</small></b>&nbsp;<span style="width:25px; height:20px ;"
+                    class="blue"></span></div>
+            </div>
+            <div class="col">
+                <div class="color" style="display:flex"><b>Special Shift A:<br><small>02:00PM To 8:00AM</small></b>&nbsp;<span style="width:50px; height:20px ;background-color: rgba(196, 192, 109, 0.326);"
+                        ></span></div>
+            </div>
+            <div class="col">
+                <div class="color" style="display:flex"><b>Special Shift B:<br><small>08:00PM To 8:00AM</small></b>&nbsp;<span style="width:50px; height:20px ;background-color: rgba(196, 192, 109, 0.326);"
+                        ></span></div>
+            </div> -->
+
+        </div>
+        <br>
+        <div style="text-align: center;" *ngIf="isLoading">
+            <p-progressSpinner [style]="{width: '50px', height: '50px'}"></p-progressSpinner>
+        </div>
+        <div class="zui-scroller" *ngIf="this.data?.length>0 && !isLoading">
+            <table id="tblData" class="zui-table">
+                <thead>
+                    <tr>
+                        <th style="background-color: rgb(158,194,194); border: 1px solid rgb(255, 255, 255);
+                        padding: 10px;
+                        text-align: center;
+                        white-space: nowrap;
+                        position: sticky;
+                        top: 0;"><b>WEEKS</b></th>
+                        <th style="background-color: rgb(158,194,194); border: 1px solid rgb(255, 255, 255);
+                        padding: 10px;
+                        text-align: center;
+                        white-space: nowrap;
+                        position: sticky;
+                        top: 0;"><b>DAYS</b></th>
+                        <th style="background-color: rgb(158,194,194); border: 1px solid rgb(255, 255, 255);
+                        padding: 10px;
+                        text-align: center;
+                        white-space: nowrap;
+                        position: sticky;
+                        top: 0;">
+                            <b>Health <br> Facility</b>
+                        </th>
+                        <th style="background-color: rgb(158,194,194); border: 1px solid rgb(255, 255, 255);
+                        padding: 10px;
+                        text-align: center;
+                        white-space: nowrap;
+                        position: sticky;
+                        top: 0;" *ngFor="let list of this.data;">
+                            <b [innerHTML]="list?.hf | texttransform"></b>
+                            <b>{{list.EmployeeName | uppercase}}</b>
+                            <p *ngIf="list.Designation!=''">{{list.Designation!=""?list.Designation:""}}</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let day of this.dateList; let i=index">
+                        <td *ngIf="i % 7 == 0 && i<30 && i/7+1<5 " style="background-color: rgb(255, 251, 202);width:10%;  border: 1px solid rgb(255, 255, 255);
+                        color: rgb(32, 32, 32);
+                        padding: 10px;
+                        white-space: nowrap;" rowspan="7">
+                            <b>Week{{i/7+1}}</b>
+                        </td>
+                        <td *ngIf="i % 7 == 0 && i<30 && i/7+1==5" style="background-color: rgb(255, 251, 202);width:10%;  border: 1px solid rgb(255, 255, 255);
+                        color: rgb(32, 32, 32);
+                        padding: 10px;
+                        white-space: nowrap;" rowspan="3">
+                            <b>Week{{i/7+1}}</b>
+                        </td>
+                        <td style="background-color: rgb(255, 240, 255);">
+                            <b>{{day.SchedularDate | date:'EEEE, MMMM d, y' }}</b>
+
+                        </td>
+                        <td [attr.rowspan]="this.finalData.length" *ngIf="i==0"
+                            style="background-color:rgb(191, 255, 205);color: rgb(0, 123, 51);width:10%; writing-mode: vertical-rl;font-size: large;">
+                            <b>{{this.data[0].FullName}}</b>
+                        </td>
+                        <ng-container *ngFor="let emp of this.data;let j = index">
+                            <td [attr.rowspan]="this.finalData.length" *ngIf="emp.hf=='Health Facility' && i==0"
+                                style="background-color:rgb(191, 255, 205);color: rgb(0, 123, 51);width:10%; writing-mode: vertical-rl;font-size: large;">
+                                <b> {{saveHf(this.data[j+1].FullName)}}</b>
+                            </td>
+                            <td id={{emp.Id}}{{day.SchedularDate}}{{emp.ShiftName}}
+                                *ngIf="emp.Id && emp.ShiftName == 'Morning'"
+                                style="background-color: rgb(146, 255, 251); text-align: center;">
+                                {{GetData(emp.Id, day.SchedularDate,emp.ShiftName, emp.SwapFromEmployeeId, emp.SwapToEmployeeId)}}
+                                <span *ngIf="emp.DepartmentName != null" style="display: block;margin-top: 10px;">{{emp.DepartmentName}} </span>
+                            </td>
+                            <td id={{emp.Id}}{{day.SchedularDate}}{{emp.ShiftName}}
+                                *ngIf="emp.Id && emp.ShiftName == 'Evening'"
+                                style="background-color: rgb(253,234,182); text-align: center;">
+                                {{GetData(emp.Id, day.SchedularDate,emp.ShiftName, emp.SwapFromEmployeeId, emp.SwapToEmployeeId)}}
+                                <span *ngIf="emp.DepartmentName != null" style="display: block;margin-top: 10px;">{{emp.DepartmentName}} </span>
+                            </td>
+                            <td id={{emp.Id}}{{day.SchedularDate}}{{emp.ShiftName}}
+                                *ngIf="emp.Id && emp.ShiftName == 'Night'"
+                                style="background-color: rgb(230, 230, 230); text-align: center;">
+                                {{GetData(emp.Id, day.SchedularDate,emp.ShiftName, emp.SwapFromEmployeeId, emp.SwapToEmployeeId)}}
+                                <span *ngIf="emp.DepartmentName != null" style="display: block;margin-top: 10px;">{{emp.DepartmentName}} </span>
+                            </td>
+                            <!-- <td id={{emp.Id}}{{day.SchedularDate}}{{emp.ShiftName}}
+                                *ngIf="emp.Id && emp.ShiftName == 'Simple BHU Peon Shift'"
+                                style="background-color: rgba(196, 192, 109, 0.326); text-align: center;">
+                                {{GetData(emp.Id, day.SchedularDate,emp.ShiftName)}}<span *ngIf="emp.DepartmentName != null" style="display: block;margin-top: 10px;">{{emp.DepartmentName}} </span>
+                            </td> -->
+                            <td id={{emp.Id}}{{day.SchedularDate}}{{emp.ShiftName}}
+                                *ngIf="emp.Id && emp.ShiftName.includes('Special')"
+                                style="background-color: rgba(196, 192, 109, 0.326); text-align: center;">
+                                {{GetData(emp.Id, day.SchedularDate,emp.ShiftName, emp.SwapFromEmployeeId, emp.SwapToEmployeeId)}}
+                                <span *ngIf="emp.DepartmentName != null" style="display: block;margin-top: 10px;">{{emp.DepartmentName}} </span>
+                            </td>
+                        </ng-container>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="col-md-12" *ngIf="isShow && !isLoading">
+            <p style="text-align: center;"><b>No Data to Display</b></p>
+        </div>
+        <div class="col-md-12" *ngIf="isServerResponding">
+            <p style="text-align: center;"><b>Server not responding</b></p>
+        </div>
+    </div>

@@ -1,0 +1,8 @@
+#contentToConvert{
+    background: #000;
+}
+@media print {
+    table.paging thead td, table.paging tfoot td {
+        height: .5in;
+    }
+}

@@ -1,0 +1,145 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+        cursor: pointer;
+    }
+
+    th,
+    td {
+        text-align: center;
+        /* padding: 8px; */
+    }
+
+    .b1 {
+        background-color: #175DD7;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 14px;
+        margin: 4px 2px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .b1:hover {
+        opacity: 1
+    }
+
+
+    .b2 {
+        background-color: #17BAD7;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 14px;
+        margin: 4px 2px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .b2:hover {
+        opacity: 1
+    }
+</style>
+
+<table class="table-stats">
+    <tr>
+        <th>Sr</th>
+        <th>Name</th>
+        <th>Cnic</th>
+        <th>Desingnation</th>
+        <th>Employee Mode</th>
+        <th style="width:240px">Action</th>
+    </tr>
+    <tr class="cursor-p" *ngFor="let vp of workerData; let i=index">
+        <td *ngIf="i<=data-1">
+            <p class="m-0 cursor-p hover-success text-medium">
+                {{i+1}}
+            </p>
+        </td>
+        <td *ngIf="i<=data-1">
+            <p class="m-0 cursor-p hover-success text-medium">
+                {{vp.name}}
+            </p>
+        </td>
+        <td *ngIf="i<=data-1">
+            <p class="m-0 cursor-p hover-success text-medium">
+                {{vp.cnic}}
+            </p>
+        </td>
+        <td *ngIf="i<=data-1">
+            <p class="m-0 cursor-p hover-success text-medium">
+                {{vp.designation}}
+            </p>
+        </td>
+
+        <td *ngIf="i<=data-1">
+            <p class="m-0 cursor-p hover-success text-medium">
+                {{vp.EmpMode}}
+            </p>
+        </td>
+        <td *ngIf="i<=data-1">
+            <button class="b1">btn1</button>
+            <button (click)="getShedule(vp)" class="b2">Shedule</button>
+        </td>
+    </tr>
+</table>
+
+
+
+<!-- 
+<table mat-table [dataSource]="workerData" class="mat-elevation-z8">
+    <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let data"> {{data.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="cnic">
+        <th mat-header-cell *matHeaderCellDef> Cnic </th>
+        <td mat-cell *matCellDef="let data" > {{data.cnic}} </td>
+    </ng-container>
+    <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef> Designation </th>
+        <td mat-cell *matCellDef="let data"> {{data.designation}} </td>
+    </ng-container>
+    <ng-container matColumnDef="EmpMode">
+        <th mat-header-cell *matHeaderCellDef> Employee Mode </th>
+        <td mat-cell *matCellDef="let data"> {{data.EmpMode}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td class="b1" mat-cell *matCellDef="let data"> <button (click)="getShedule(data)" >btn1</button></td>
+        <td mat-cell *matCellDef="let data" > <button  (click)="getShedule(data)" type="button" >btn2</button></td>
+    </ng-container>
+   <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td class="btn1" mat-cell *matCellDef="let data" > <button  (click)="getShedule(data)" type="button" >btn2</button></td>
+    </ng-container> 
+
+    <tr mat-header-row *matHeaderRowDef="cols "></tr>
+    <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+</table> -->

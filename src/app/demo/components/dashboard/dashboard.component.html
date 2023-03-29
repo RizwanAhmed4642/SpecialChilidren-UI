@@ -1,0 +1,526 @@
+<!-- <div style="position: fixed;left: 50%;top: 50%;width: 100%;height: 100%;z-index: 9999;" *ngIf="isLoading">
+    <p-progressSpinner></p-progressSpinner>
+</div>     -->
+
+<div class="grid">
+    <!-- Displaying Cards Row 1 (TOTAL) -->
+    <div class="col-12 lg:col-12 xl:col-12">
+        <div class="card w-100">
+            <div class="p-fluid p-formgrid grid">
+                <div class="col-12 lg:col-6 xl:col-6">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div
+                                    class="text-800 font-medium  font-bold"
+                                >
+                                Total Patient Register
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{
+                                    width: '2.5rem',
+                                    height: '2.5rem'
+                                }"
+                            >
+                                <i
+                                    class="pi pi-users text-blue-500 "
+                                ></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl"
+                            >{{ employeeCountTotal.TotalCount }}
+                        </span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-6">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div
+                                    class="text-800 font-medium  font-bold"
+                                >
+                                Today Patient Register
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{
+                                    width: '2.5rem',
+                                    height: '2.5rem'
+                                }"
+                            >
+                                <i
+                                    class="pi pi-users text-blue-500 "
+                                ></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl"
+                            >{{ employeeCountTotal.TotalCount }}
+                        </span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-12 xl:col-12">
+        <div class="card w-100">
+            <div class="p-fluid p-formgrid grid">
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div class="text-800 font-small ">
+                                    <strong>Total Physiotherapist Screening </strong>
+                                    
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl">{{
+                            employeeCountHfType.tEmployeeDhq
+                        }}</span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Revenue</span> -->
+                                <div class="text-800 font-medium ">
+                                    <strong>Total Dental Assessment </strong>
+                                   
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl">{{
+                            employeeCountHfType.tEmployeeThq
+                        }}</span>
+                        <!-- <span class="text-500">since last week</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Customers</span> -->
+                                <div class="text-800 font-medium  font-bold">
+                                    Total Ophthalmology
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl">{{
+                            employeeCountHfType.tEmployeeRhc
+                        }}</span>
+                        <!-- <span class="text-500">newly registered</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div class="text-800 font-medium ">
+                                    <strong>Total Speech Therapy Assessment </strong>
+                                   
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl"
+                            >{{
+                                employeeCountHfType.tEmployeeBhuSimple +
+                                    employeeCountHfType.tEmployeeBhuPlus +
+                                    employeeCountHfType.tEmployeeBhuFull
+                            }}
+                        </span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div class="text-800 font-medium  font-bold">
+                               Total Hearing Assessment
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-green-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-database text-green-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-medium text-5xl">{{
+                            devicesData.totalRegisteredDevices
+                        }}</span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Revenue</span> -->
+                                <div class="text-800 font-medium  font-bold pr-2">
+                                    Total Mental Health Assessment
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-red-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-database text-red-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-red-400 font-medium text-5xl">{{
+                            devicesData.totalUnRegisteredDevices
+                        }}</span>
+                        <!-- <span class="text-500">since last week</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-12 xl:col-12">
+        <div class="card w-100">
+            <div class="p-fluid p-formgrid grid">
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div class="text-800 font-small ">
+                                    <strong>Today Physiotherapist Screening </strong>
+                                    
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl">{{
+                            employeeCountHfType.tEmployeeDhq
+                        }}</span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Revenue</span> -->
+                                <div class="text-800 font-medium ">
+                                    <strong>Today Dental Assessment </strong>
+                                   
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl">{{
+                            employeeCountHfType.tEmployeeThq
+                        }}</span>
+                        <!-- <span class="text-500">since last week</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Customers</span> -->
+                                <div class="text-800 font-medium  font-bold">
+                                    Today Ophthalmology
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl">{{
+                            employeeCountHfType.tEmployeeRhc
+                        }}</span>
+                        <!-- <span class="text-500">newly registered</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div class="text-800 font-medium ">
+                                    <strong>Today Speech Therapy Assessment </strong>
+                                   
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-users text-blue-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-blue-400 font-medium text-5xl"
+                            >{{
+                                employeeCountHfType.tEmployeeBhuSimple +
+                                    employeeCountHfType.tEmployeeBhuPlus +
+                                    employeeCountHfType.tEmployeeBhuFull
+                            }}
+                        </span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
+                                <div class="text-800 font-medium  font-bold">
+                                    Today Hearing Assessment
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-green-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-database text-green-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-green-400 font-medium text-5xl">{{
+                            devicesData.totalRegisteredDevices
+                        }}</span>
+                        <!-- <span class="text-500">since last visit</span> -->
+                    </div>
+                </div>
+                <div class="col-12 lg:col-6 xl:col-4">
+                    <div class="card mb-0">
+                        <div class="flex justify-content-between mb-3">
+                            <div>
+                                <!-- <span class="block text-500 font-medium mb-3">Revenue</span> -->
+                                <div class="text-800 font-medium  font-bold pr-2">
+                                    Today Mental Health Assessment
+                                </div>
+                            </div>
+                            <div
+                                class="flex align-items-center justify-content-center bg-red-100 border-round"
+                                [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                            >
+                                <i class="pi pi-database text-red-500 "></i>
+                            </div>
+                        </div>
+                        <span class="text-red-400 font-medium text-5xl">{{
+                            devicesData.totalUnRegisteredDevices
+                        }}</span>
+                        <!-- <span class="text-500">since last week</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+   
+   
+    <!-- Last Card -->
+    <!-- End Displaying Cards Row 4 -->
+
+    <!-- Filters Cards -->
+    <div class="col-12 lg:col-12 xl:col-12">
+        <div class="card w-100">
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-4 md:col-4">
+                    <label htmlFor="state"><b>Division</b></label>
+                    <!-- Select division -->
+                    <p-dropdown
+                        [disabled]="disableDivnDist"
+                        [options]="this.divisions"
+                        placeholder="{{ placeHolderDivision }}"
+                        (onChange)="dropdownValueChanged($event.value, 'Div')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.divisionsData"
+                    ></p-dropdown>
+                </div>
+                <div class="field col-4 md:col-4">
+                    <label htmlFor="state"><b>District</b></label>
+                    <!-- Select district -->
+                    <p-dropdown
+                        [disabled]="disableDivnDist"
+                        [options]="this.districts"
+                        placeholder="{{ placeHolderDistrict }}"
+                        (onChange)="dropdownValueChanged($event.value, 'Dis')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.districtsData"
+                    ></p-dropdown>
+                </div>
+                <div class="field col-4 md:col-4">
+                    <label htmlFor="state"><b>Tehsil</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.tehsils"
+                        placeholder="{{ placeHolderTehsil }}"
+                        (onChange)="dropdownValueChanged($event.value, 'Teh')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.tehsilsData"
+                    ></p-dropdown>
+                </div>
+
+                <div class="field col-4 md:col-4">
+                    <label htmlFor="state"><b>Health Facility Type</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.hfTypes"
+                        placeholder="{{ placeHolderHfType }}"
+                        (onChange)="dropdownValueChanged($event.value, 'bhu')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.HfTypesData"
+                    ></p-dropdown>
+                </div>
+                <div
+                    *ngIf="
+                        this.HfTypesData?.Name === 'Basic Health Unit' ||
+                        this.hfTypes[0]?.Name === 'Basic Health Unit'
+                    "
+                    class="field col-12 md:col-4"
+                >
+                    <label htmlFor="state"><b>Basic Health Unit</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.BasicHealthUnit"
+                        placeholder="{{ placeHolderBHU }}"
+                        (onChange)="dropdownValueChanged($event.value, 'hft')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.BasicHealthUnitType"
+                    ></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="state"><b>Health Facility</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.healthFacilities"
+                        placeholder="{{ placeHolderHf }}"
+                        (onChange)="dropdownValueChanged($event.value, 'hf')"
+                        optionLabel="FullName"
+                        [(ngModel)]="this.healthFacilitiesData"
+                    ></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="state"><b>Designation</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.designation"
+                        placeholder="{{ placeHolderDes }}"
+                        (onChange)="dropdownValueChanged($event.value, 'des')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.designationData"
+                    ></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Filters Cards End -->
+
+    <!-- Displaying Table Card -->
+    <div class="col-12">
+        <h5>Employees</h5>
+        <div class="card">
+            <p-table
+                [value]="products"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [paginator]="true"
+                styleClass="p-datatable-gridlines"
+                [rows]="30"
+                [rowsPerPageOptions]="[40, 60, 70, 100]"
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Sr. #</th>
+                        <th>
+                            Divisions <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th>Districts</th>
+                        <th>Tehsils</th>
+                        <th>
+                            Health Facilities
+                            <p-sortIcon
+                                field="WorkingHealthFacility"
+                            ></p-sortIcon>
+                        </th>
+                        <th>Designation</th>
+                        <th>Total Employees</th>
+                        <th>Registered Employees</th>
+                        <th>Un-Registered Employees</th>
+                    </tr>
+                </ng-template>
+                <ng-template
+                    pTemplate="body"
+                    let-product
+                    let-rowIndex="rowIndex"
+                >
+                    <tr>
+                        <td>{{ rowIndex + 1 }}</td>
+                        <td>{{ product.Division }}</td>
+                        <td>{{ product.District }}</td>
+                        <td>{{ product.Tehsil }}</td>
+                        <td>{{ product.WorkingHealthFacility }}</td>
+                        <td>{{ product.Designation }}</td>
+                        <td class="customer-badge status-new text-center">
+                            {{ product.Count }}
+                        </td>
+                        <td class="customer-badge status-proposal text-center">
+                            {{ product.Register }}
+                        </td>
+                        <td
+                            class="customer-badge status-unqualified text-center"
+                        >
+                            {{ product.UnRegister }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <!-- Displaying Table Card End -->
+</div>
