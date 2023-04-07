@@ -18,6 +18,7 @@ import { authInterceptorProviders } from 'src/app/Services/auth.interceptor';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CalendarModule } from "primeng/calendar";
 import { DatePipe } from '@angular/common';
+import { Ng9OdometerModule } from 'ng9-odometer';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { DatePipe } from '@angular/common';
         DialogModule,
         ProgressSpinnerModule,
         CalendarModule,
+        Ng9OdometerModule.forRoot()
       
     ],
     providers: [
