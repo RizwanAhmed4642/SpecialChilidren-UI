@@ -22,6 +22,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor, authInterceptorProviders } from './Services/auth.interceptor';
 
+
+
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent,LoadDataComponent, WorkerListComponent

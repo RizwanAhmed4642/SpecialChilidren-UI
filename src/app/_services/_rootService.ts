@@ -14,6 +14,7 @@ export class RootService {
     return this.http.get(`${Config.getControllerUrl('Root', 'GetDutyRosterDesignation')}/${hfmisCode}/${hfTypeCode}`);
   }
   public getDivisions() {
+    debugger
     return this.http.get(`${Config.getControllerUrl('Root', 'GetDivisions')}`);
   }
 
@@ -28,13 +29,18 @@ export class RootService {
     return this.http.get(`${Config.getControllerUrl('Root', 'GetShiftById')}/${shiftId}`);
   }
 
-  public getDistricts(divCode: string) {
+  public getDistricts(code: string) {
 
-    return this.http.get(`${Config.getControllerUrl('Root', 'GetDistricts')}/${divCode}`);
+    return this.http.get(`${Config.getControllerUrl('Root', 'GetDistricts')}/${code}`);
   }
 
   public getTehsils(disCode: string) {
+    debugger
     return this.http.get(`${Config.getControllerUrl('Root', 'GetTehsils')}/${disCode}`);
+  }
+  public getSchools(code: string) {
+    debugger
+    return this.http.get(`${Config.getControllerUrl('Root', 'GetSchools')}/${code}`);
   }
 
   public getHFTypes() {
@@ -125,6 +131,30 @@ export class RootService {
   //   debugger
   //   return this.http.get(`${Config.getControllerUrl("Dashboard", "GetEmployeewithPersentage")}/${code}`);
   // }
+  public GetDashboardCount() {
+    debugger
+    return this.http.get(`${Config.getControllerUrl("Dashboard", "GetCounterDashboard")}`);
+   
+  }
+  // public GetDashboardCountDate(DateFrom:any,DateTo:any) {
+  //   debugger
+  //   return this.http.get(`${Config.getControllerUrl("Dashboard", "GetCounterDashboard")}/${DateFrom}/${DateTo}`);
+   
+  // }
+
+  public GetDashboardCountDate(obj:object) {
+    debugger
+    return this.http.post(`${Config.getControllerUrl("Dashboard", "GetCounterDashboard")}`,obj);
+  }
+  public GetDetailDashboardList(obj:object) {
+    debugger
+    return this.http.post(`${Config.getControllerUrl("Dashboard", "GetDashboardDetailCount")}`,obj);
+  }
+  public GetStudentList(obj:object) {
+    debugger
+    return this.http.post(`${Config.getControllerUrl("Dashboard", "GetStudentList")}`,obj);
+  }
+ 
   public GetEmployeeCountLoginWise(code: any) {
     // debugger
     return this.http.get(`${Config.getControllerUrl("Dashboard", "GetEmployeeCountLoginWise")}/${code}`);
@@ -174,6 +204,7 @@ export class RootService {
     // debugger
     return this.http.get(`${Config.getControllerUrl("Dashboard", "GetEmployeesDesignationsCount")}/${code}`);
   }
+  
 
   public DutyRosterGetPreDefinedShiftDesignations() {
     // debugger

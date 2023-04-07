@@ -21,7 +21,34 @@ export class AppMenuComponent implements OnInit {
                       
                 ]
             },
-            
+            // {
+            //     label: 'Events',
+            //     items: [
+            //         {
+            //             label: 'Event',
+            //             icon: 'pi pi-fw pi-fw pi-calendar',
+            //             items: [
+            //                 {
+            //                     label: 'Create Event',
+            //                     icon: 'pi pi-fw pi-list',
+            //                     routerLink: ['/dashboard/duty-roster']
+            //                 },
+                            
+                            
+            //                 {
+            //                     label: 'Manage Event',
+            //                     icon: 'pi  pi-fw pi-file',
+            //                     routerLink: ['/dashboard/duty-roster/manage-shifts']
+            //                 },
+                            
+                          
+                            
+            //             ]
+            //         },
+                   
+                    
+            //     ]
+            // },
                 
            
     //        

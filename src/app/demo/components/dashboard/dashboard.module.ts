@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard.component';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
@@ -16,11 +16,14 @@ import {DialogModule} from 'primeng/dialog';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { authInterceptorProviders } from 'src/app/Services/auth.interceptor';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { CalendarModule } from "primeng/calendar";
+import { DatePipe } from '@angular/common';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         ChartModule,
         MenuModule,
         TableModule,
@@ -32,10 +35,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
         DropdownModule,
         DialogModule,
         ProgressSpinnerModule,
-        
+        CalendarModule,
+      
     ],
     providers: [
-        authInterceptorProviders
+        authInterceptorProviders,
+        DatePipe
 
     ],
     declarations: [DashboardComponent]
