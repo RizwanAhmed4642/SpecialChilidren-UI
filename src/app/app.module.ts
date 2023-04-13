@@ -22,11 +22,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor, authInterceptorProviders } from './Services/auth.interceptor';
 
+import { TestingComponent } from './demo/components/testing/testing.component';
+
+
 
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent,LoadDataComponent, WorkerListComponent
+        AppComponent, NotfoundComponent,LoadDataComponent, WorkerListComponent, TestingComponent
     ],
     imports: [
         BrowserModule,

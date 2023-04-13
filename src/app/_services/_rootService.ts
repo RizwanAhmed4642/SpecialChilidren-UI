@@ -146,13 +146,25 @@ export class RootService {
     debugger
     return this.http.post(`${Config.getControllerUrl("Dashboard", "GetCounterDashboard")}`,obj);
   }
+  public GetMisingToken(obj:object) {
+    debugger
+    return this.http.post(`${Config.getControllerUrl("MissingToken", "GetMisingToken")}`,obj);
+  }
   public GetDetailDashboardList(obj:object) {
     debugger
     return this.http.post(`${Config.getControllerUrl("Dashboard", "GetDashboardDetailCount")}`,obj);
   }
+  public GetMisingTokenList(obj:object) {
+    debugger
+    return this.http.post(`${Config.getControllerUrl("MissingToken", "GetMisingToken")}`,obj);
+  }
   public GetStudentList(obj:object) {
     debugger
     return this.http.post(`${Config.getControllerUrl("Dashboard", "GetStudentList")}`,obj);
+  }
+  public GetMixingStudent(obj:object) {
+    debugger
+    return this.http.post(`${Config.getControllerUrl("MissingToken", "GetMixingStudentList")}`,obj);
   }
  
   public GetEmployeeCountLoginWise(code: any) {

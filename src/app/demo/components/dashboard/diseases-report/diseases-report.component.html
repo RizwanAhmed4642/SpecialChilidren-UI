@@ -1,0 +1,208 @@
+<!-- <div style="position: fixed;left: 50%;top: 50%;width: 100%;height: 100%;z-index: 9999;" *ngIf="isLoading">
+    <p-progressSpinner></p-progressSpinner>
+</div>     -->
+
+<div class="grid">
+    <div class="col-12 lg:col-12 xl:col-12">
+        <div class="card">
+            <div>
+                <p-dialog header="Students" [(visible)]="displayModal" [modal]="true" showEffect="fade"
+                    [style]="{width: '60vw'}" [breakpoints]="{'960px': '75vw'}">
+                    <div class="col-12">
+
+                        <p-table [value]="StudentRecordList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
+                            styleClass="p-datatable-gridlines" [rows]="30" [rowsPerPageOptions]="[40, 60, 70, 100]">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>Sr. #</th>
+
+                                    <th>Name</th>
+                                    <th>Father Name </th>
+                                    <th>Class Grade</th>
+                                    <th>DateBirth</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>BForm</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-studentRecordList let-rowIndex="rowIndex">
+                                <tr>
+                                    <td>{{ rowIndex + 1 }}</td>
+                                    <td>{{ studentRecordList.Name }}</td>
+                                    <td>{{ studentRecordList.Swo }}</td>
+                                    <td>{{ studentRecordList.ClassGrade }}</td>
+                                    <td>
+                                        {{ studentRecordList.Dob }}
+                                    </td>
+                                    <td>{{ studentRecordList.Age }}</td>
+                                    <td>{{ studentRecordList.Gender }}</td>
+                                    <td>{{ studentRecordList.BForm }}</td>
+                                    <td>Action</td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+
+                </p-dialog>
+            </div>
+            <form [formGroup]="DateForm" (ngSubmit)="SubmitSearch()" (keydown.enter)="$event.preventDefault()">
+                <div class="row flex align-items-center">
+                    <div class="field col-1 md:col-1"></div>
+                    <div class="field col-1 md:col-1">
+                        <label htmlFor="DateFrom"><strong>Date From </strong></label>
+                    </div>
+                    <div class="field col-3 md:col-3">
+                        <p-calendar [showIcon]="true" id="DateFrom" formControlName="DateFrom"
+                            inputId="icon"></p-calendar>
+                    </div>
+                    <div class="field col-1 md:col-1">
+                        <label htmlFor="DateTo"><strong>Date To</strong></label>
+                    </div>
+                    <div class="field col-3 md:col-3">
+                        <p-calendar [showIcon]="true" id="LeaveTo" formControlName="DateTo" inputId="icon"></p-calendar>
+                    </div>
+
+                    <div class="field col-2 md:col-2">
+                        <button class="btn btn-success" type="submit">Check</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Last Card -->
+<!-- End Displaying Cards Row 4 -->
+
+<!-- Filters Cards -->
+<div class="col-12 lg:col-12 xl:col-12">
+    <div class="card w-100">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-6 md:col-6">
+                <label htmlFor="state"><b>Division</b></label>
+                <!-- Select division -->
+                <p-dropdown [disabled]="disableDivnDist" [options]="this.divisions"
+                    placeholder="{{ placeHolderDivision }}" (onChange)="dropdownValueChanged($event.value, 'Div')"
+                    optionLabel="NAME" [(ngModel)]="this.divisionsData"></p-dropdown>
+            </div>
+            <div class="field col-6 md:col-6">
+                <label htmlFor="state"><b>District</b></label>
+                <!-- Select district -->
+                <p-dropdown [disabled]="disableDivnDist" [options]="this.districts"
+                    placeholder="{{ placeHolderDistrict }}" (onChange)="dropdownValueChanged($event.value, 'Dis')"
+                    optionLabel="NAME" [(ngModel)]="this.districtsData"></p-dropdown>
+            </div>
+            <!-- <div class="field col-4 md:col-3">
+                    <label htmlFor="state"><b>Tehsil</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.tehsils"
+                        placeholder="{{ placeHolderTehsil }}"
+                        (onChange)="dropdownValueChanged($event.value, 'Teh')"
+                        optionLabel="NAME"
+                        [(ngModel)]="this.tehsilsData"
+                    ></p-dropdown>
+                </div> -->
+
+            <!-- <div class="field col-4 md:col-4">
+                    <label htmlFor="state"><b>School</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.schools"
+                        placeholder="School"
+                        (onChange)="dropdownValueChanged($event.value, 'sch')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.HfTypesData"
+                    ></p-dropdown>
+              
+            </div> -->
+        </div>
+    </div>
+    <div class="card w-100">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-6 md:col-6">
+                <label htmlFor="state"><b>Assessment</b></label>
+                <!-- Select division -->
+                <p-dropdown [disabled]="disableDivnDist" [options]="this.divisions"
+                    placeholder="{{ placeHolderDivision }}" (onChange)="dropdownValueChanged($event.value, 'Div')"
+                    optionLabel="NAME" [(ngModel)]="this.divisionsData"></p-dropdown>
+            </div>
+            <div class="field col-6 md:col-6">
+                <label htmlFor="state"><b>Diseases</b></label>
+                <!-- Select district -->
+                <p-dropdown [disabled]="disableDivnDist" [options]="this.districts"
+                    placeholder="{{ placeHolderDistrict }}" (onChange)="dropdownValueChanged($event.value, 'Dis')"
+                    optionLabel="NAME" [(ngModel)]="this.districtsData"></p-dropdown>
+            </div>
+            <!-- <div class="field col-4 md:col-3">
+                    <label htmlFor="state"><b>Tehsil</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.tehsils"
+                        placeholder="{{ placeHolderTehsil }}"
+                        (onChange)="dropdownValueChanged($event.value, 'Teh')"
+                        optionLabel="NAME"
+                        [(ngModel)]="this.tehsilsData"
+                    ></p-dropdown>
+                </div> -->
+
+            <!-- <div class="field col-4 md:col-4">
+                    <label htmlFor="state"><b>School</b></label>
+                    <p-dropdown
+                        [disabled]="this.isDisable"
+                        [options]="this.schools"
+                        placeholder="School"
+                        (onChange)="dropdownValueChanged($event.value, 'sch')"
+                        optionLabel="Name"
+                        [(ngModel)]="this.HfTypesData"
+                    ></p-dropdown>
+              
+            </div> -->
+        </div>
+    </div>
+    <!-- Filters Cards End -->
+
+    <!-- Displaying Table Card -->
+    <div class="col-12">
+        <h5>Total Assessment Report</h5>
+        <div class="card">
+            <p-table [value]="DashboardCountList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
+                styleClass="p-datatable-gridlines" [rows]="10" [rowsPerPageOptions]="[30, 50, 70, 100]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Sr. #</th>
+                        <!-- <th>
+                            Divisions <p-sortIcon field="name"></p-sortIcon>
+                        </th> -->
+                        <th>Districts</th>
+                        <th>Schools</th>
+                        <th> Assessments</th>
+                        <th>TotalCount</th>
+                        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-dashboarddetalcount let-rowIndex="rowIndex">
+                    <tr>
+                        <td>{{ rowIndex + 1 }}</td>
+                        <td>{{ dashboarddetalcount.DistrictName }}</td>
+                        <td>{{ dashboarddetalcount.SchoolName }}</td>
+                        <td>{{ dashboarddetalcount.Parameter }}</td>
+                        <td (click)="this.StudentList(dashboarddetalcount)">{{ dashboarddetalcount.TotalCount }}</td>
+                      
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    
+    <!-- Displaying Table Card End -->
+</div>
+

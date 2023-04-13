@@ -18,8 +18,11 @@ export class AppMenuComponent implements OnInit {
                 label: 'Dashboard',
                 items: [
                     { label: 'Dashboard', icon: 'pi pi-tablet pi-chart-line', routerLink: ['/dashboard'] },
+                    { label: 'Mising Token', icon: 'pi pi-tablet pi-chart-line', routerLink: ['/dashboard/parameterropert'] },
+                    { label: 'Diseases Report', icon: 'pi pi-tablet pi-chart-line', routerLink: ['/dashboard/dieasesreport'] },
                       
                 ]
+                
             },
             // {
             //     label: 'Events',

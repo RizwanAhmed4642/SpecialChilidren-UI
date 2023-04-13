@@ -484,7 +484,7 @@
 
     <!-- Displaying Table Card -->
     <div class="col-12">
-        <h5>Count</h5>
+        <h5>Total Assessment Report</h5>
         <div class="card">
             <p-table [value]="DashboardCountList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
                 styleClass="p-datatable-gridlines" [rows]="10" [rowsPerPageOptions]="[30, 50, 70, 100]">
@@ -510,21 +510,26 @@
                         <td>{{ rowIndex + 1 }}</td>
                         <td>{{ dashboarddetalcount.DistrictName }}</td>
                         <td>{{ dashboarddetalcount.Name }}</td>
-                        <td (click)="this.StudentList(dashboarddetalcount)">{{ dashboarddetalcount.TotalScreen }}</td>
-                        <td>
+                        <td (click)="this.StudentList(dashboarddetalcount,'TS')">{{ dashboarddetalcount.TotalScreen }}</td>
+                        <td (click)="this.StudentList(dashboarddetalcount,'TPP')">
                             {{ dashboarddetalcount.TotalPhysicalParameter }}
                         </td>
-                        <td>
+                        <td (click)="this.StudentList(dashboarddetalcount,'TDT')">
                             {{ dashboarddetalcount.TotalDentalTransactions }}
                         </td>
-                        <td>{{ dashboarddetalcount.TotalOphthalmologist }}</td>
-                        <td>{{ dashboarddetalcount.TotalSpeechTherapist }}</td>
-                        <td>{{ dashboarddetalcount.TotalENT }}</td>
-                        <td>{{ dashboarddetalcount.TotalPsychologist }}</td>
+                        <td (click)="this.StudentList(dashboarddetalcount,'TO')">
+                            {{ dashboarddetalcount.TotalOphthalmologist }}
+                        </td>
+                        <td (click)="this.StudentList(dashboarddetalcount,'TST')">
+                            {{ dashboarddetalcount.TotalSpeechTherapist }}
+                        </td>
+                        <td (click)="this.StudentList(dashboarddetalcount,'TENT')">{{ dashboarddetalcount.TotalENT }}</td>
+                        <td (click)="this.StudentList(dashboarddetalcount,'TPSY')">{{ dashboarddetalcount.TotalPsychologist }}</td>
                     </tr>
                 </ng-template>
             </p-table>
         </div>
     </div>
+    
     <!-- Displaying Table Card End -->
 </div>

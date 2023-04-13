@@ -19,6 +19,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CalendarModule } from "primeng/calendar";
 import { DatePipe } from '@angular/common';
 import { Ng9OdometerModule } from 'ng9-odometer';
+import { ParameterreportComponent } from './parameterreport/parameterreport.component';
+import { DiseasesReportComponent } from './diseases-report/diseases-report.component';
 
 @NgModule({
     imports: [
@@ -45,6 +47,6 @@ import { Ng9OdometerModule } from 'ng9-odometer';
         DatePipe
 
     ],
-    declarations: [DashboardComponent]
+    declarations: [DashboardComponent, ParameterreportComponent, DiseasesReportComponent]
 })
 export class DashboardModule { }

@@ -1,26 +1,30 @@
+
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup,FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { Product } from '../../api/product';
+import { Product } from '../../../api/product';
 import { Subscription } from 'rxjs';
 import { SelectItem } from 'primeng/api';
 
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RootService } from 'src/app/_services/_rootService';
 import { EmployeeService } from 'src/app/_services/employee.service';
-import { ProfileFiltersModel } from './models/profile-filters-model.model';
+import { ProfileFiltersModel } from '../models/profile-filters-model.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Message, MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
-import { DashboardDto } from './models/dashboard-dto';
-import { DashboardDetailDto } from './models/dashboard-detail-dto';
+import { DashboardDto } from '../models/dashboard-dto';
+import { DashboardDetailDto } from '../models/dashboard-detail-dto';
 
 @Component({
-    templateUrl: './dashboard.component.html',
+  selector: 'app-parameterreport',
+  templateUrl: './parameterreport.component.html',
+  styleUrls: ['./parameterreport.component.scss'],
+    
     providers: [MessageService]
     
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class ParameterreportComponent implements OnInit, OnDestroy {
  DateFrom : Date = new Date();
     items!: MenuItem[];
 
@@ -65,7 +69,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         // this.GetDashboardCount();
         this.getDivisions();
-        this.GetDashboardCountList(this.dashboardDetailDto);
+        // this.GetDashboardCountList(this.dashboardDetailDto);
         this.GetDashboardCountDate(this.DashboardDto)
         // this.getDivisions();
         // var retrievedObject: any = localStorage.getItem('ussr');
@@ -112,10 +116,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public tehsils: Array<{ NAME: string, PKCODE: string }> = [];
     public schools: Array<{ NAME: string, PKCODE: string }> = [];
     public schoolsData = { NAME: "", PKCODE: "" };
-    public tehsilsData = { NAME: "", PKCODE: "" };
-
-
- 
+    public tehsilsData = { NAME: "", PKCODE: "" }; 
     public displayModal: boolean = false;     
     public isShow: boolean = false;
     
@@ -152,13 +153,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public GetDashboardCountDate(object:any) {
       this.isLoading = true;
       debugger
-      this.rootService.GetDashboardCountDate(object)
+      this.rootService.GetMisingToken(object)
         .subscribe((x: any) => {
           if (x) {
             debugger
             this.isLoading =false; 
             // this.DashBoardCountTotal.;
-          this.DashBoardCountTotal = x;
+          this.DashboardCountList = x;
           console.log("Dashboard Total Employee count :: ",x);
           
           }
@@ -171,7 +172,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
    this.isLoading = true;
    this.DashboardCountList=[];
 
-   this.rootService.GetDetailDashboardList(object).subscribe((res: any) => {
+   this.rootService.GetMisingTokenList(object).subscribe((res: any) => {
      if (res) {
        console.log("Get  Response :: ",res);
 
@@ -182,17 +183,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
      err => { this.handleError(err); }
    );
  }
- public StudentList(event:any,para:any) {
+ public StudentList(event:any) {
   debugger
   this.displayModal=true;
   this.StudentRecordList=[];
  var obj ={
   SchoolId :event.SchoolId,
   locationId:event.TehsilId,
-  Para:para
+  Param:event.Parameter
 
  }
- this.rootService.GetStudentList(obj).subscribe((res: any) => {
+ this.rootService.GetMixingStudent(obj).subscribe((res: any) => {
   if (res) {
     console.log("Get  Response :: ",res);
     debugger  
@@ -356,3 +357,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   
   
 }
+
+
+
+
+
