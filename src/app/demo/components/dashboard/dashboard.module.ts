@@ -14,13 +14,16 @@ import { DropdownModule } from 'primeng/dropdown';
 import { PaginatorModule } from 'primeng/paginator';
 import {DialogModule} from 'primeng/dialog';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import { authInterceptorProviders } from 'src/app/Services/auth.interceptor';
+import { AuthInterceptor,authInterceptorProviders } from 'src/app/Services/auth.interceptor';
+import { LoadingServiceService } from 'src/app/Services/loading-service.service';
+
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CalendarModule } from "primeng/calendar";
 import { DatePipe } from '@angular/common';
 import { Ng9OdometerModule } from 'ng9-odometer';
 import { ParameterreportComponent } from './parameterreport/parameterreport.component';
 import { DiseasesReportComponent } from './diseases-report/diseases-report.component';
+import { DevicesReportComponent } from './devices-report/devices-report.component';
 
 @NgModule({
     imports: [
@@ -44,9 +47,10 @@ import { DiseasesReportComponent } from './diseases-report/diseases-report.compo
     ],
     providers: [
         authInterceptorProviders,
-        DatePipe
-
+        DatePipe,
+        AuthInterceptor
+        
     ],
-    declarations: [DashboardComponent, ParameterreportComponent, DiseasesReportComponent]
+    declarations: [DashboardComponent, ParameterreportComponent, DiseasesReportComponent, DevicesReportComponent]
 })
 export class DashboardModule { }

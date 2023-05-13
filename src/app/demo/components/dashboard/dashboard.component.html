@@ -1,75 +1,137 @@
-<!-- <div style="position: fixed;left: 50%;top: 50%;width: 100%;height: 100%;z-index: 9999;" *ngIf="isLoading">
+<div
+    style="
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+    "
+    *ngIf="loadingService.isLoading$ | async"
+>
     <p-progressSpinner></p-progressSpinner>
-</div>     -->
+</div>
 
 <div class="grid">
     <div class="col-12 lg:col-12 xl:col-12">
         <div class="card">
             <div>
-                <p-dialog header="Students" [(visible)]="displayModal" [modal]="true" showEffect="fade"
-                    [style]="{width: '60vw'}" [breakpoints]="{'960px': '75vw'}">
+                <p-dialog
+                    header="Students"
+                    [(visible)]="displayModal"
+                    [modal]="true"
+                    showEffect="fade"
+                    [style]="{ width: '60vw' }"
+                    [breakpoints]="{ '960px': '75vw' }"
+                >
                     <div class="col-12">
-
-                        <p-table [value]="StudentRecordList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
-                            styleClass="p-datatable-gridlines" [rows]="30" [rowsPerPageOptions]="[40, 60, 70, 100]">
+                        <p-table
+                            [value]="StudentRecordList"
+                            [tableStyle]="{ 'min-width': '50rem' }"
+                            [paginator]="true"
+                            styleClass="p-datatable-gridlines"
+                            [rows]="40"
+                            [rowsPerPageOptions]="[40, 60, 70, 100]"
+                        >
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Sr. #</th>
-
+                                    <th>Registration No</th>
                                     <th>Name</th>
-                                    <th>Father Name </th>
+                                    <th>Father Name</th>
                                     <th>Class Grade</th>
                                     <th>DateBirth</th>
                                     <th>Age</th>
                                     <th>Gender</th>
                                     <th>BForm</th>
-                                    <th>Action</th>
-
+                                    <th>Registration Date</th>
+                                    <th></th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-studentRecordList let-rowIndex="rowIndex">
+                            <ng-template
+                                pTemplate="body"
+                                let-studentRecordList
+                                let-rowIndex="rowIndex"
+                            >
                                 <tr>
                                     <td>{{ rowIndex + 1 }}</td>
+                                    <td>
+                                        {{
+                                            studentRecordList.PatientRegistrationId
+                                        }}
+                                    </td>
                                     <td>{{ studentRecordList.Name }}</td>
                                     <td>{{ studentRecordList.Swo }}</td>
                                     <td>{{ studentRecordList.ClassGrade }}</td>
-                                    <td>
-                                        {{ studentRecordList.Dob }}
-                                    </td>
+                                    <td>{{ studentRecordList.Dob }}</td>
                                     <td>{{ studentRecordList.Age }}</td>
                                     <td>{{ studentRecordList.Gender }}</td>
                                     <td>{{ studentRecordList.BForm }}</td>
-                                    <td>Action</td>
-
+                                    <td>
+                                        {{
+                                            studentRecordList.Regdate
+                                                | date : "dd-MM-yyyy"
+                                        }}
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
-
                     </div>
-
                 </p-dialog>
             </div>
-            <form [formGroup]="DateForm" (ngSubmit)="SubmitSearch()" (keydown.enter)="$event.preventDefault()">
+            <div class="row flex align-items-center">
+                <div class="field col-1 md:col-1"></div>
+              
+                <div class="field col-10 md:col-10">
+                    <p-dropdown
+                
+                    [options]="this.EventList"
+                    placeholder="{{ placeHolderEvent }}"                 
+              
+                    (onChange)="EventValueChanged($event.value)"
+                    optionLabel="Name"
+                    [(ngModel)]="this.EventData"
+                    styleClass="col-12 md:col-12"
+                ></p-dropdown>
+                </div>
+            </div>
+           
+            <form
+                [formGroup]="DateForm"
+                (ngSubmit)="SubmitSearch()"
+                (keydown.enter)="$event.preventDefault()"
+            >
                 <div class="row flex align-items-center">
                     <div class="field col-1 md:col-1"></div>
                     <div class="field col-1 md:col-1">
-                        <label htmlFor="DateFrom"><strong>Date From </strong></label>
+                        <label htmlFor="DateFrom"
+                            ><strong>Date From </strong></label
+                        >
                     </div>
                     <div class="field col-3 md:col-3">
-                        <p-calendar [showIcon]="true" id="DateFrom" formControlName="DateFrom"
-                            inputId="icon"></p-calendar>
+                        <p-calendar
+                            [showIcon]="true"
+                            id="DateFrom"
+                            formControlName="DateFrom"
+                            inputId="icon"
+                        ></p-calendar>
                     </div>
                     <div class="field col-1 md:col-1">
                         <label htmlFor="DateTo"><strong>Date To</strong></label>
                     </div>
                     <div class="field col-3 md:col-3">
-                        <p-calendar [showIcon]="true" id="LeaveTo" formControlName="DateTo" inputId="icon"></p-calendar>
+                        <p-calendar
+                            [showIcon]="true"                  
+                            formControlName="DateTo"
+                            inputId="icon"
+                        ></p-calendar>
                     </div>
 
                     <div class="field col-2 md:col-2">
-                        <button class="btn btn-success" type="submit">Check</button>
+                        <button class="btn btn-success" type="submit">
+                            Check
+                        </button>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -89,16 +151,24 @@
                                 Total Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{
                                 width: '2.5rem',
                                 height: '2.5rem'
-                            }">
+                            }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
-                        <ng9-odometer [number]="DashBoardCountTotal.TotalPatientRegistration" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="
+                                DashBoardCountTotal.TotalPatientRegistration
+                            "
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                 </div>
@@ -112,18 +182,26 @@
                                 Today Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{
                                 width: '2.5rem',
                                 height: '2.5rem'
-                            }">
+                            }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TodayPatientRegistration |
                         number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TodayPatientRegistration" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="
+                                DashBoardCountTotal.TodayPatientRegistration
+                            "
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last visit</span> -->
@@ -142,19 +220,25 @@
                         <div>
                             <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
                             <div class="text-800 font-small">
-                                <strong>Total Physiotherapist Assessment
-                                </strong>
+                                <strong>Total PhysicianAssessment </strong>
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TotalPhysicalParameters | number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TotalPhysicalParameters" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="
+                                DashBoardCountTotal.TotalPhysicalParameters
+                            "
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last visit</span> -->
@@ -169,15 +253,20 @@
                                 <strong>Total Dental Assessment </strong>
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TotalDental | number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TotalDental" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TotalDental"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last week</span> -->
@@ -192,15 +281,20 @@
                                 Total Ophthalmology Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TotalOphthalmologist | number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TotalOphthalmologist" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TotalOphthalmologist"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">newly registered</span> -->
@@ -212,19 +306,25 @@
                         <div>
                             <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
                             <div class="text-800 font-medium">
-                                <strong>Total Speech Therapy Assessment
+                                <strong
+                                    >Total Speech Therapy Assessment
                                 </strong>
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TotalSpeechTherapist | number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TotalSpeechTherapist" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TotalSpeechTherapist"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last visit</span> -->
@@ -239,8 +339,10 @@
                                 Total Hearing Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-green-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-green-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-database text-green-500"></i>
                         </div>
                     </div>
@@ -248,8 +350,11 @@
                         <!--{{
                          DashBoardCountTotal.TotalENT | number
                         }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TotalENT" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TotalENT"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
 
@@ -265,8 +370,10 @@
                                 Total Mental Health Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-red-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-red-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-database text-red-500"></i>
                         </div>
                     </div>
@@ -274,8 +381,11 @@
                         <!--{{
                          DashBoardCountTotal.TotalMentalHealth | number
                         }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TotalMentalHealth" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TotalMentalHealth"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
 
@@ -294,19 +404,25 @@
                         <div>
                             <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
                             <div class="text-800 font-small">
-                                <strong>Today Physiotherapist Assessment
-                                </strong>
+                                <strong>Today PhysicianAssessment </strong>
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{DashBoardCountTotal.TodayPhysicalParameters | number}} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TodayPhysicalParameters" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="
+                                DashBoardCountTotal.TodayPhysicalParameters
+                            "
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
 
@@ -322,15 +438,20 @@
                                 <strong>Today Dental Assessment </strong>
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TodayDental | number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TodayDental" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TodayDental"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last week</span> -->
@@ -345,16 +466,21 @@
                                 Today Ophthalmology Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TodayOphthalmologist |
                         number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TodayOphthalmologist" [config]="{ auto: true }"
-                            [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TodayOphthalmologist"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">newly registered</span> -->
@@ -366,19 +492,26 @@
                         <div>
                             <!-- <span class="block text-500 font-medium mb-3">Total Employees</span> -->
                             <div class="text-800 font-medium">
-                                <strong>Today Speech Therapy Assessment
+                                <strong
+                                    >Today Speech Therapy Assessment
                                 </strong>
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-users text-blue-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TodaySpeechTherapist |
                         number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TodaySpeechTherapist" [config]="{ auto: true }" [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TodaySpeechTherapist"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last visit</span> -->
@@ -393,14 +526,20 @@
                                 Today Hearing Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-green-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-green-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-database text-green-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TodayENT | number }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TodayENT" [config]="{ auto: true }" [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TodayENT"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last visit</span> -->
@@ -415,15 +554,21 @@
                                 Today Mental Health Assessment
                             </div>
                         </div>
-                        <div class="flex align-items-center justify-content-center bg-red-100 border-round"
-                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+                        <div
+                            class="flex align-items-center justify-content-center bg-red-100 border-round"
+                            [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                        >
                             <i class="pi pi-database text-red-500"></i>
                         </div>
                     </div>
                     <span class="text-blue-400 font-medium text-5xl">
                         <!-- {{ DashBoardCountTotal.TodayMentalHealth | number
                         }} -->
-                        <ng9-odometer [number]="DashBoardCountTotal.TodayMentalHealth" [config]="{ auto: true }" [theme]="'plaza'">
+                        <ng9-odometer
+                            [number]="DashBoardCountTotal.TodayMentalHealth"
+                            [config]="{ auto: true }"
+                            [theme]="'plaza'"
+                        >
                         </ng9-odometer>
                     </span>
                     <!-- <span class="text-500">since last week</span> -->
@@ -437,22 +582,32 @@
 <!-- End Displaying Cards Row 4 -->
 
 <!-- Filters Cards -->
-<div class="col-12 lg:col-12 xl:col-12">
-    <div class="card w-100">
+<div class="col-12 lg:col-12 xl:col-12" *ngIf="this.LocationDropdown">
+    <div class="card w-100" >
         <div class="p-fluid p-formgrid grid">
             <div class="field col-6 md:col-6">
                 <label htmlFor="state"><b>Division</b></label>
                 <!-- Select division -->
-                <p-dropdown [disabled]="disableDivnDist" [options]="this.divisions"
-                    placeholder="{{ placeHolderDivision }}" (onChange)="dropdownValueChanged($event.value, 'Div')"
-                    optionLabel="NAME" [(ngModel)]="this.divisionsData"></p-dropdown>
+                <p-dropdown
+                    [disabled]="disableDivnDist"
+                    [options]="this.divisions"
+                    placeholder="{{ placeHolderDivision }}"
+                    (onChange)="dropdownValueChanged($event.value, 'Div')"
+                    optionLabel="NAME"
+                    [(ngModel)]="this.divisionsData"
+                ></p-dropdown>
             </div>
             <div class="field col-6 md:col-6">
                 <label htmlFor="state"><b>District</b></label>
                 <!-- Select district -->
-                <p-dropdown [disabled]="disableDivnDist" [options]="this.districts"
-                    placeholder="{{ placeHolderDistrict }}" (onChange)="dropdownValueChanged($event.value, 'Dis')"
-                    optionLabel="NAME" [(ngModel)]="this.districtsData"></p-dropdown>
+                <p-dropdown
+                    [disabled]="disableDivnDist"
+                    [options]="this.districts"
+                    placeholder="{{ placeHolderDistrict }}"
+                    (onChange)="dropdownValueChanged($event.value, 'Dis')"
+                    optionLabel="NAME"
+                    [(ngModel)]="this.districtsData"
+                ></p-dropdown>
             </div>
             <!-- <div class="field col-4 md:col-3">
                     <label htmlFor="state"><b>Tehsil</b></label>
@@ -480,14 +635,47 @@
             </div> -->
         </div>
     </div>
+</div>
     <!-- Filters Cards End -->
 
     <!-- Displaying Table Card -->
+    <div class="col-12 lg:col-12 xl:col-12">
     <div class="col-12">
         <h5>Total Assessment Report</h5>
         <div class="card">
-            <p-table [value]="DashboardCountList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
-                styleClass="p-datatable-gridlines" [rows]="10" [rowsPerPageOptions]="[30, 50, 70, 100]">
+            <p-table
+                [value]="DashboardCountList"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [paginator]="true"
+                styleClass="p-datatable-gridlines"
+                [rows]="30"
+                [rowsPerPageOptions]="[30, 50, 70, 100,200,400,600]"
+            >
+                <ng-template pTemplate="caption">
+                    <button
+                        type="button"
+                        pButton
+                        pRipple
+                        (click)="exportCountScreeningReport()"
+                        class="p-button-outlined ml-2"
+                        pTooltip="XLS"
+                        tooltipPosition="bottom"
+                    >
+                        &nbsp; Export To Excel
+                    </button>
+
+                    <button
+                        type="button"
+                        pButton
+                        pRipple
+                        (click)="exportStudentScreeningReport()"
+                        class="p-button-outlined p-button-success ml-2"
+                        pTooltip="XLS"
+                        tooltipPosition="bottom"
+                    >
+                        &nbsp; Export Detail Report
+                    </button>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Sr. #</th>
@@ -496,8 +684,8 @@
                         </th> -->
                         <th>Districts</th>
                         <th>Schools</th>
-                        <th>Total Assessment</th>
-                        <th>Physiotherapist</th>
+                        <th>Total Registration</th>
+                        <th>Physician</th>
                         <th>Dental</th>
                         <th>Ophthalmology</th>
                         <th>Speech Therapy</th>
@@ -505,31 +693,69 @@
                         <th>Mental Health</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-dashboarddetalcount let-rowIndex="rowIndex">
+                <ng-template
+                    pTemplate="body"
+                    let-dashboarddetalcount
+                    let-rowIndex="rowIndex"
+                >
                     <tr>
                         <td>{{ rowIndex + 1 }}</td>
                         <td>{{ dashboarddetalcount.DistrictName }}</td>
                         <td>{{ dashboarddetalcount.Name }}</td>
-                        <td (click)="this.StudentList(dashboarddetalcount,'TS')">{{ dashboarddetalcount.TotalScreen }}</td>
-                        <td (click)="this.StudentList(dashboarddetalcount,'TPP')">
+                        <td
+                            (click)="
+                                this.StudentList(dashboarddetalcount, 'TS')
+                            "
+                        >
+                            {{ dashboarddetalcount.TotalScreen }}
+                        </td>
+                        <td
+                            (click)="
+                                this.StudentList(dashboarddetalcount, 'TPP')
+                            "
+                        >
                             {{ dashboarddetalcount.TotalPhysicalParameter }}
                         </td>
-                        <td (click)="this.StudentList(dashboarddetalcount,'TDT')">
+                        <td
+                            (click)="
+                                this.StudentList(dashboarddetalcount, 'TDT')
+                            "
+                        >
                             {{ dashboarddetalcount.TotalDentalTransactions }}
                         </td>
-                        <td (click)="this.StudentList(dashboarddetalcount,'TO')">
+                        <td
+                            (click)="
+                                this.StudentList(dashboarddetalcount, 'TO')
+                            "
+                        >
                             {{ dashboarddetalcount.TotalOphthalmologist }}
                         </td>
-                        <td (click)="this.StudentList(dashboarddetalcount,'TST')">
+                        <td
+                            (click)="
+                                this.StudentList(dashboarddetalcount, 'TST')
+                            "
+                        >
                             {{ dashboarddetalcount.TotalSpeechTherapist }}
                         </td>
-                        <td (click)="this.StudentList(dashboarddetalcount,'TENT')">{{ dashboarddetalcount.TotalENT }}</td>
-                        <td (click)="this.StudentList(dashboarddetalcount,'TPSY')">{{ dashboarddetalcount.TotalPsychologist }}</td>
+                        <td
+                            (click)="
+                                this.StudentList(dashboarddetalcount, 'TENT')
+                            "
+                        >
+                            {{ dashboarddetalcount.TotalENT }}
+                        </td>
+                        <td
+                            (click)="
+                                this.StudentList(dashboarddetalcount, 'TPSY')
+                            "
+                        >
+                            {{ dashboarddetalcount.TotalPsychologist }}
+                        </td>
                     </tr>
                 </ng-template>
             </p-table>
         </div>
     </div>
-    
+
     <!-- Displaying Table Card End -->
 </div>

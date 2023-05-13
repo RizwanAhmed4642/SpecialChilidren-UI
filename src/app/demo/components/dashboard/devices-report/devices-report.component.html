@@ -50,23 +50,6 @@
 
                 </p-dialog>
             </div>
-            <div class="row flex align-items-center">
-                <div class="field col-1 md:col-1"></div>
-              
-                <div class="field col-10 md:col-10">
-                    <p-dropdown
-                    [disabled]="disableDivnDist"
-                    [options]="this.EventList"
-                    placeholder="{{ placeHolderEvent }}"                 
-              
-                    (onChange)="EventValueChanged($event.value)"
-                    optionLabel="Name"
-                    [(ngModel)]="this.EventData"
-                    styleClass="col-12 md:col-12"
-                ></p-dropdown>
-                </div>
-            </div>
-               
             <form [formGroup]="DateForm" (ngSubmit)="SubmitSearch()" (keydown.enter)="$event.preventDefault()">
                 <div class="row flex align-items-center">
                     <div class="field col-1 md:col-1"></div>
@@ -101,8 +84,8 @@
 <!-- End Displaying Cards Row 4 -->
 
 <!-- Filters Cards -->
-<div class="col-12 lg:col-12 xl:col-12" >
-    <div class="card w-100" *ngIf="this.LocationDropdown">
+<div class="col-12 lg:col-12 xl:col-12">
+    <div class="card w-100">
         <div class="p-fluid p-formgrid grid">
             <div class="field col-6 md:col-6">
                 <label htmlFor="state"><b>Division</b></label>
@@ -127,7 +110,7 @@
     <div class="col-12">
         
         <div class="card">
-            <h5>Physical Assessment Disease Wise Report</h5>
+            <h5>Physician Devices Recommended</h5>
             <p-table [value]="PhysicalList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
                 styleClass="p-datatable-gridlines" [rows]="5" [rowsPerPageOptions]="[5,10,30, 50, 70, 100,200]">
                 <ng-template pTemplate="caption">
@@ -178,7 +161,7 @@
     <div class="col-12">
         
         <div class="card">
-            <h5>Dental Assessment Disease Wise Report</h5>
+            <h5>Ophthalmologist Devices Recommended</h5>
             <p-table [value]="DentalList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
                 styleClass="p-datatable-gridlines" [rows]="5" [rowsPerPageOptions]="[5,10,30, 50, 70, 100,200]">
                 <ng-template pTemplate="caption">
@@ -258,7 +241,7 @@
     <div class="col-12">
         
         <div class="card">
-            <h5>Visual Assessment Disease Wise Report</h5>
+            <h5>Audiologist Devices Recommended</h5>
             <p-table [value]="OphthalmologistList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
                 styleClass="p-datatable-gridlines" [rows]="5" [rowsPerPageOptions]="[5,10,30, 50, 70, 100,200]">
                 <ng-template pTemplate="caption">
@@ -316,190 +299,8 @@
             </p-table>
         </div>
     </div>
-    <div class="col-12">
-        
-        <div class="card">
-            <h5>Speech Assessment Disease Wise Report</h5>
-            <p-table [value]="SpeechList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
-                styleClass="p-datatable-gridlines" [rows]="5" [rowsPerPageOptions]="[5,10,30, 50, 70, 100,200]">
-                <ng-template pTemplate="caption">
-                    <button type="button" pButton pRipple  (click)="exportExcelReport('SpeechAssessmentReport')" class="p-button-outlined ml-2" pTooltip="XLS" tooltipPosition="bottom"> &nbsp; Export To Excel</button> 
-                    <!-- <button type="button" pButton pRipple  (click)="exportMisingDetail()" class="p-button-outlined p-button-success ml-2" pTooltip="XLS" tooltipPosition="bottom"> &nbsp; Export Detail Report</button>  -->
-
-                </ng-template>
-                
-                
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Sr. #</th>
-                        <!-- <th>
-                            Divisions <p-sortIcon field="name"></p-sortIcon>
-                        </th> -->
-                        <th>Districts</th>
-                        <th>Schools</th>                
-                        <th> Speech and language disorders
-                        </th>
-                        <th>Stammering</th>
-                        <th>Articulation Disorder</th>
-                        <th> Hearing impairment                        </th>
-                        <th>Selective Mutism</th>
-                        <th>Down syndrome</th>
-                        <th>Hoarseness</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-speechList let-rowIndex="rowIndex">
-                    <tr>
-                        <td>{{ rowIndex + 1 }}</td>
-                        <td>{{ speechList.DistrictName }}</td>
-                        <td>{{ speechList.SchoolName }}</td>
-                  
-                        <td (click)="this.StudentList(speechList,'Physical  Assessment')">
-                            {{ speechList.TotalSpeechandLanguageDisorders }}
-                        </td>
-                        <td (click)="this.StudentList(speechList,'Dental  Assessment')">
-                            {{ speechList.TotalStammering }}
-                        </td>
-                        <td (click)="this.StudentList(speechList,'Ophthalmologist  Assessment')">
-                            {{ speechList.TotalArticulationDisorder }}
-                        </td>
-                        <td (click)="this.StudentList(speechList,'SpeechTherapist  Assessment')">
-                            {{ speechList.TotalHearingimpairment }}
-                        </td>
-                        <td (click)="this.StudentList(speechList,'Ent  Assessment')">{{ speechList.TotalSelectiveMutism }}</td>
-                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalDownsyndrome }}</td>
-                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalHoarseness }}</td>
-                   
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-    </div>
-    <div class="col-12">
-        
-        <div class="card">
-            <h5>Hearing Assessment Disease Wise Report</h5>
-            <p-table [value]="EntList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
-                styleClass="p-datatable-gridlines" [rows]="5" [rowsPerPageOptions]="[5,10,30, 50, 70, 100,200]">
-                <ng-template pTemplate="caption">
-                    <button type="button" pButton pRipple  (click)="exportExcelReport('HearingAssessmentReport')" class="p-button-outlined ml-2" pTooltip="XLS" tooltipPosition="bottom"> &nbsp; Export To Excel</button> 
-                    <!-- <button type="button" pButton pRipple  (click)="exportMisingDetail()" class="p-button-outlined p-button-success ml-2" pTooltip="XLS" tooltipPosition="bottom"> &nbsp; Export Detail Report</button>  -->
-
-                </ng-template>
-                
-                
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Sr. #</th>
-                        <!-- <th>
-                            Divisions <p-sortIcon field="name"></p-sortIcon>
-                        </th> -->
-                        <th>Districts</th>
-                        <th>Schools</th>                
-                        <th>Otalgia</th>
-                        <th>Ear Discharge</th>
-                        <th>Microtia</th>
-                        <th> Impacted Cerumen</th>
-                        <th>AOM</th>
-                        <th>CSOM</th>
-                     
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-entList let-rowIndex="rowIndex">
-                    <tr>
-                        <td>{{ rowIndex + 1 }}</td>
-                        <td>{{ entList.DistrictName }}</td>
-                        <td>{{ entList.SchoolName }}</td>
-                  
-                        <td (click)="this.StudentList(entList,'Physical  Assessment')">
-                            {{ entList.TotalOtalgia }}
-                        </td>
-                        <td (click)="this.StudentList(entList,'Dental  Assessment')">
-                            {{ entList.TotalEarDischarge }}
-                        </td>
-                        <td (click)="this.StudentList(entList,'Ophthalmologist  Assessment')">
-                            {{ entList.TotalMicrotia }}
-                        </td>
-                        <td (click)="this.StudentList(entList,'SpeechTherapist  Assessment')">
-                            {{ entList.TotalImpactedCerumen }}
-                        </td>
-                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalAOM }}</td>
-                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalCSOM }}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-    </div>
-    <div class="col-12">
-        
-        <div class="card">
-            <h5>Mental Assessment Disease Wise Report</h5>
-            <p-table [value]="MentalList" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
-                styleClass="p-datatable-gridlines" [rows]="5" [rowsPerPageOptions]="[5,10,30, 50, 70, 100,200]">
-                <ng-template pTemplate="caption">
-                    <button type="button" pButton pRipple  (click)="exportExcelReport('MentalAssessmentReport')"class="p-button-outlined ml-2" pTooltip="XLS" tooltipPosition="bottom"> &nbsp; Export To Excel</button> 
-                    <!-- <button type="button" pButton pRipple  (click)="exportMisingDetail()" class="p-button-outlined p-button-success ml-2" pTooltip="XLS" tooltipPosition="bottom"> &nbsp; Export Detail Report</button>  -->
-
-                </ng-template>
-                
-                
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Sr. #</th>
-                        <!-- <th>
-                            Divisions <p-sortIcon field="name"></p-sortIcon>
-                        </th> -->
-                        <th>Districts</th>
-                        <th>Schools</th>                
-                        <th>Macro cephalous</th>
-                        <th> Down Syndrome
-                        </th>
-                        <th> Head Injury
-                        </th>
-                        <th>Neuro Development Disorder</th>
-                        <th>Intellectual Deficit</th>
-                        <th> Childhood Depression
-                        </th>
-                        <th>Children Anxiety
-                        </th>
-                        <th> Separation Anxiety
-                        </th>
-                        <th> Adjustment Disorder
-                        </th>
-                        <th> Stress
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-mentalList let-rowIndex="rowIndex">
-                    <tr>
-                        <td>{{ rowIndex + 1 }}</td>
-                        <td>{{ mentalList.DistrictName }}</td>
-                        <td>{{ mentalList.SchoolName }}</td>
-                  
-                        <td (click)="this.StudentList(mentalList,'Physical  Assessment')">
-                            {{ mentalList.TotalMacrocephalous }}
-                        </td>
-                        <td (click)="this.StudentList(mentalList,'Dental  Assessment')">
-                            {{ mentalList.TotalDownSyndrome }}
-                        </td>
-                        <td (click)="this.StudentList(mentalList,'Ophthalmologist  Assessment')">
-                            {{ mentalList.TotalHeadInjury }}
-                        </td>
-                        <td (click)="this.StudentList(mentalList,'SpeechTherapist  Assessment')">
-                            {{ mentalList.TotalNeuroDevelopmentDisorder }}
-                        </td>
-                        <td (click)="this.StudentList(mentalList,'Ent  Assessment')">{{ mentalList.TotalIntellectualDeficit }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalIChildhoodDepression }}</td>
-                    
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalChildrenAnxiety }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalSeparationAnxiety }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalAdjustmentDisorder }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalStress }}</td>
-                   
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-    </div>
+    
     
     <!-- Displaying Table Card End -->
 </div>
+

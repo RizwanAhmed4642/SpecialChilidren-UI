@@ -16,18 +16,17 @@ import { DashboardDetailDto } from '../models/dashboard-detail-dto';
 import * as FileSaver from 'file-saver';
 
 @Component({
-  selector: 'app-diseases-report',
-  templateUrl: './diseases-report.component.html',
-  styleUrls: ['./diseases-report.component.scss'],
-    
-    providers: [MessageService]
-    
+  selector: 'app-devices-report',
+  templateUrl: './devices-report.component.html',
+  styleUrls: ['./devices-report.component.scss'],
+  providers: [MessageService]
 })
-export class DiseasesReportComponent implements OnInit, OnDestroy {
+
+
+export class DevicesReportComponent implements OnInit, OnDestroy {
  DateFrom : Date = new Date();
     items!: MenuItem[];
-    EventList!: any;
-    LocationDropdown:any =false;
+
     products!: any;
     DashboardCountList!: any;
     StudentRecordList!: any;
@@ -43,8 +42,7 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
     code='';
     chartData: any;
     chartOptions: any;
-    ScreeningTypeId=0;
-    public EventData = { Id: 0, Name: "" };
+
     subscription!: Subscription;
     public DateForm: FormGroup = new FormGroup({
       Name: new FormControl(''),
@@ -53,7 +51,7 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
    
   
     });
-    public user: any = null;
+
     private profileFiltersModel = new ProfileFiltersModel;
     private dashboardDetailDto = new DashboardDetailDto;
    
@@ -75,20 +73,6 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.isLoading = true;
         // this.GetDashboardCount();
-        var retrievedObject: any = localStorage.getItem('ussr');
-        this.user = JSON.parse(retrievedObject);
-        debugger
-        if(this.user.Location ==null || this.user.Location =='' )
-        {
-          this.LocationDropdown=true;
-        }
-        else
-        {
-          this.LocationDropdown=false;
-          this.dashboardDetailDto.location=this.user.Location;
-         
-          this.DashboardDto.location=this.user.Location;
-        }
         this.getDivisions();
         // this.GetDashboardCountList(this.dashboardDetailDto);
         this.GetDashboardCountDate(this.DashboardDto)
@@ -98,7 +82,7 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
         this.GetSpeechReport(this.DashboardDto)
         this.GetEntReport(this.DashboardDto)
         this.GetMentalReport(this.DashboardDto)
-        this.getEvents();
+       
 
 
         // this.getDivisions();
@@ -136,7 +120,7 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
         }
     }
 
-
+    public user: any = null;
    
    
     public divisions: Array<{ NAME: string, PKCODE: string }> = []
@@ -158,58 +142,14 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
     disableDivnDist:boolean= false
     public isLoading = false
     public totalRec: any = [];
-    public placeHolderEvent = 'Select Event'
+ 
     // rowGroupMetadata: any; // Extra
     public DashBoardCountTotal = { TotalPatientRegistration: 0, TotalPhysicalParameters: 0, TotalDental: 0,TotalOphthalmologist:0,TotalSpeechTherapist:0,TotalENT:0
       , TotalMentalHealth: 0, TodayPatientRegistration: 0,TodayPhysicalParameters:0,TodayDental:0,TodayOphthalmologist:0
       ,TodaySpeechTherapist:0,TodayENT:0,TodayMentalHealth:0
     };
-    private getEvents = () => {
-      this.rootService.GetEvents().subscribe((res: any) => { 
-        debugger
-        this.EventList = res;
-        console.log("Printing all EventList :: ",this.EventList);
-        // if (this.user.DivisionCode != null) {
-        //   this.placeHolderDivision = ''
-        //   this.placeHolderDistrict = ''
-        //     this.divisions = this.divisions.filter(x => x.PKCODE === this.user.DivisionCode);
-        //     this.disableDivnDist = true;
-        //     this.loadDistrict(this.user.DistrictCode)
-        //     if (this.user.TehsilCode != null) {
-        //       this.loadTehsils(this.user.TehsilCode);
-        //     } else {
-        //       this.loadTehsils(this.user.DistrictCode);
-        //     }
-        // }
-        
-      },
-        err => { this.handleError(err); }
-      );
-  }
-  public EventValueChanged = (value) => {
-    debugger
-    this.ScreeningTypeId=0;
-      console.log(value);
-      if (!value) {
-        return;
-      }
-      else
-      {
-        debugger
-        this.ScreeningTypeId=value.Id;
+  
 
-        var obj = {
-     
-          DateFrom: this.DateForm.value.DateFrom,
-          DateTo   : this.DateForm.value.DateTo,
-          ScreeningTypeId:this.ScreeningTypeId,
-          Location:this.user.Location
-        }
-        this.GetDashboardCountDate(obj);
-        this.GetDashboardCountList(obj);
-
-      }  
-    };
 
     // Dashboard Total Employee count (hfmisCode) => First Row
     public GetDashboardCount() {
@@ -628,6 +568,8 @@ public GetMentalReport (object:any) {
     }
   
 }
+
+
 
 
 
