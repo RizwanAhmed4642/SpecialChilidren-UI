@@ -28,6 +28,7 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
     items!: MenuItem[];
     EventList!: any;
     LocationDropdown:any =false;
+    ScreenTypeDropdown:any =false;
     products!: any;
     DashboardCountList!: any;
     StudentRecordList!: any;
@@ -88,6 +89,18 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
           this.dashboardDetailDto.location=this.user.Location;
          
           this.DashboardDto.location=this.user.Location;
+        }
+        if(this.user.FullName=='Special Children Dashboard')
+        {
+          this.ScreenTypeDropdown=false;
+          this.dashboardDetailDto.ScreeningTypeId=1;
+         
+          this.DashboardDto.ScreeningTypeId=1;
+        }
+        else
+        {
+          this.ScreenTypeDropdown=true;
+       
         }
         this.getDivisions();
         // this.GetDashboardCountList(this.dashboardDetailDto);
@@ -205,8 +218,13 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
           ScreeningTypeId:this.ScreeningTypeId,
           Location:this.user.Location
         }
-        this.GetDashboardCountDate(obj);
-        this.GetDashboardCountList(obj);
+        this.GetPhysicalDiseasesReport(obj);
+        this.GetDentalDiseasesReport(obj);
+        this.GetOphthalmologistDiseasesReport(obj);
+        this.GetSpeechReport(obj);
+        this.GetEntReport(obj);
+        this.GetMentalReport(obj);
+
 
       }  
     };
@@ -276,6 +294,7 @@ export class DiseasesReportComponent implements OnInit, OnDestroy {
   }
 public GetPhysicalDiseasesReport (object:any) {
     this.isLoading = true;
+    this.PhysicalList =[];
     debugger
     this.rootService.GetPhysicalDiseasesReport(object)
       .subscribe((x: any) => {
@@ -459,10 +478,17 @@ public GetMentalReport (object:any) {
       }
       else{
       
+        if(this.user.FullName=='Special Children Dashboard')
+        {
+                  
+          this.ScreeningTypeId=1;
+        }
         var obj = {
      
           DateFrom: this.DateForm.value.DateFrom,
           DateTo   : this.DateForm.value.DateTo,
+          ScreeningTypeId:this.ScreeningTypeId,
+          Location:this.user.Location
          
         }
         this.GetDashboardCountDate(obj)

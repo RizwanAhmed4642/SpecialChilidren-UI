@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     code='';
 
     LocationDropdown:any =false;
+   ScreenTypeDropdown:any =false;
 
     chartData: any;
 
@@ -89,10 +90,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
          
           this.DashboardDto.location=this.user.Location;
         }
+        if(this.user.FullName=='Special Children Dashboard')
+        {
+          this.ScreenTypeDropdown=false;
+          this.dashboardDetailDto.ScreeningTypeId=1;
+         
+          this.DashboardDto.ScreeningTypeId=1;
+        }
+        else
+        {
+          this.ScreenTypeDropdown=true;
+       
+        }
         // this.GetDashboardCount();
          this.getDivisions();
         this.GetDashboardCountList(this.dashboardDetailDto);
         this.GetDashboardCountDate(this.DashboardDto);
+        this.GetStudentScreeningReport(this.DashboardDto);
         this.getEvents();
        
        
@@ -234,17 +248,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   });
 }
  exportStudentScreeningReport() {
-  
-  var obj = {
- 
-    DateFrom: this.DateForm.value.DateFrom,
-    DateTo   : this.DateForm.value.DateTo,
-    ScreeningTypeId:this.ScreeningTypeId,
-    Location:this.user.Location
-    
-   
-  }
-  this.GetStudentScreeningReport(obj);
 
   import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.RegisterStudentReport);
@@ -290,6 +293,8 @@ public GetStudentScreeningReport(object:any) {
  var obj ={
   SchoolId :event.SchoolId,
   locationId:event.TehsilId,
+  DateFrom: this.DateForm.value.DateFrom,
+  DateTo   : this.DateForm.value.DateTo,
   Param:para
 
  }
@@ -405,6 +410,7 @@ public GetStudentScreeningReport(object:any) {
             }
             this.GetDashboardCountDate(obj);
             this.GetDashboardCountList(obj);
+            this.GetStudentScreeningReport(obj);
 
           }  
         };
@@ -420,6 +426,12 @@ public GetStudentScreeningReport(object:any) {
             
           }
           else{
+            if(this.user.FullName=='Special Children Dashboard')
+            {
+                      
+              this.ScreeningTypeId=1;
+            }
+       
           
             var obj = {
          
@@ -429,11 +441,9 @@ public GetStudentScreeningReport(object:any) {
                Location:this.user.Location
              
             }
-            this.GetDashboardCountDate(obj);
-         
-            
+            this.GetDashboardCountDate(obj); 
             this.GetDashboardCountList(obj);
-             ;
+            this.GetStudentScreeningReport(obj);
            
         
           }

@@ -39,6 +39,7 @@ export class ParameterreportComponent implements OnInit, OnDestroy {
     ScreeningTypeId=0;
     chartOptions: any;
     LocationDropdown:any =false;
+    ScreenTypeDropdown:any =false;
 
     subscription!: Subscription;
     public DateForm: FormGroup = new FormGroup({
@@ -83,6 +84,18 @@ export class ParameterreportComponent implements OnInit, OnDestroy {
           //this.dashboardDetailDto.location=this.user.Location;
          
           this.DashboardDto.location=this.user.Location;
+        }
+        if(this.user.FullName=='Special Children Dashboard')
+        {
+          this.ScreenTypeDropdown=false;
+          this.dashboardDetailDto.ScreeningTypeId=1;
+         
+          this.DashboardDto.ScreeningTypeId=1;
+        }
+        else
+        {
+          this.ScreenTypeDropdown=true;
+       
         }
         // this.GetDashboardCount();
         this.getDivisions();
@@ -344,6 +357,11 @@ export class ParameterreportComponent implements OnInit, OnDestroy {
         return
       }
       else{
+        if(this.user.FullName=='Special Children Dashboard')
+        {
+                  
+          this.ScreeningTypeId=1;
+        }
       
         var obj = {
      

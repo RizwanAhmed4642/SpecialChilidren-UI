@@ -53,7 +53,7 @@
             <div class="row flex align-items-center">
                 <div class="field col-1 md:col-1"></div>
               
-                <div class="field col-10 md:col-10">
+                <div class="field col-10 md:col-10" *ngIf="this.ScreenTypeDropdown">
                     <p-dropdown
                     [disabled]="disableDivnDist"
                     [options]="this.EventList"
@@ -140,36 +140,53 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Sr. #</th>                       
-                        <th>Districts</th>
-                        <th>Schools</th>                
-                        <th>Total Dermatitis</th>
-                        <th>Total Eczema</th>
-                        <th>Total Fungal Infection</th>
-                        <th>Total Impetigo</th>
-                        <th>Total Scabies</th>
+                        <th>Districts</th>                                    
+                        <th> Acne</th>
+                        <th> Burns</th>
+                        <th> Dermatitis</th>
+                        <th> Eczema</th>
+                        <th> FungalInfection</th>
+                        <th>Hemangiomas</th>                     
+                        <th> HivesUrticaria</th>
+                        <th> Impetigo</th>
+                        <th> Liceinfestation</th>
+                        <th> PigmentationDisorderVitiligo</th>
+                        <th> PressuresoresDecubitussores</th>
+                        <th> Psoriasis</th>
+                        <th> Scabies</th>
+                        <th> Xerosis</th>
+                        <th> AnyOther</th>
                     
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-physicalList let-rowIndex="rowIndex">
                     <tr>
                         <td>{{ rowIndex + 1 }}</td>
-                        <td>{{ physicalList.DistrictName }}</td>
-                        <td>{{ physicalList.SchoolName }}</td>
+                        <td>{{ physicalList.DistrictName }}</td>                     
                   
                         <td (click)="this.StudentList(physicalList,'Physical  Assessment')">
-                            {{ physicalList.TotalDermatitis }}
+                            {{ physicalList.TotalAcne }}
                         </td>
                         <td (click)="this.StudentList(physicalList,'Dental  Assessment')">
-                            {{ physicalList.TotalEczema }}
+                            {{ physicalList.TotalBurns }}
                         </td>
                         <td (click)="this.StudentList(physicalList,'Ophthalmologist  Assessment')">
-                            {{ physicalList.TotalFungalInfection }}
+                            {{ physicalList.TotalDermatitis }}
                         </td>
                         <td (click)="this.StudentList(physicalList,'SpeechTherapist  Assessment')">
-                            {{ physicalList.TotalImpetigo }}
+                            {{ physicalList.TotalEczema }}
                         </td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalFungalInfection }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalHemangiomas }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalHivesUrticaria }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalImpetigo }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalLiceinfestation }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalPigmentationDisorderVitiligo }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalPressuresoresDecubitussores }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalPsoriasis }}</td>
                         <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalScabies }}</td>
-                         
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalXerosis }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalAnyOther }}</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -194,9 +211,8 @@
                         <!-- <th>
                             Divisions <p-sortIcon field="name"></p-sortIcon>
                         </th> -->
-                        <th>Districts</th>
-                        <th>Schools</th>                
-                        <th>Caries</th>
+                        <th>Districts</th>                                
+                        <th>Jaw Deformity</th>
                         <th>Toothache</th>
                         <th>Gingivitis</th>
                         <th>Periodontitis</th>
@@ -209,17 +225,24 @@
                         <th>Fluorosis</th>
                         <th>Stains</th>
                         <th>Oral Ulcer</th>
-                        <th>Crowding / Malalignment</th>
+                                             
+                        <th>Crowding</th>
+                        <th>AnyGrowth</th>
+                        <th>Attrition</th>
+                        <th>Erosion</th>
+                        <th>Abrasion</th>
+                        <th>TongueTie</th>
+                        <th>Macroglossia</th>
+                   
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-dentalList let-rowIndex="rowIndex">
                     <tr>
                         <td>{{ rowIndex + 1 }}</td>
-                        <td>{{ dentalList.DistrictName }}</td>
-                        <td>{{ dentalList.SchoolName }}</td>
+                        <td>{{ dentalList.DistrictName }}</td>                
                   
                         <td (click)="this.StudentList(dentalList,'Physical  Assessment')">
-                            {{ dentalList.TotalCaries }}
+                            {{ dentalList.TotalJawDeformity }}
                         </td>
                         <td (click)="this.StudentList(dentalList,'Dental  Assessment')">
                             {{ dentalList.TotalToothache }}
@@ -249,6 +272,13 @@
                         <td (click)="this.StudentList(dentalList,'Ent  Assessment')">{{ dentalList.TotalStains }}</td>
                         <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalOralUlcer }}</td>
                         <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalCrowding }}</td>
+                        <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalAnyGrowth }}</td>
+                        <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalAttrition }}</td>
+                        <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalErosion }}</td>
+                        <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalAbrasion }}</td>
+                        <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalTongueTie }}</td>
+                        <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalMacroglossia }}</td>
+                  
                     
                     </tr>
                 </ng-template>
@@ -275,23 +305,36 @@
                             Divisions <p-sortIcon field="name"></p-sortIcon>
                         </th> -->
                         <th>Districts</th>
-                        <th>Schools</th>                
+                              
                         <th>Retinitis Pigmentosa</th>
                         <th>Glaucoma</th>
                         <th>Chalazion</th>
+                        <th>Pterygeum</th>
                         <th>Squint</th>
                         <th> Vernal Kerato Conjunctivitis
                         </th>
                         <th>Blepharitis</th>
+                        <th>Amblyopia</th>
                         <th>Conjunctivitis</th>
+                        <th>Red Eye</th>
+                        <th>Blephritis</th>
+                        <th>Cornea Opacity</th>
                         <th>Abnormal Fundal Glow</th>
+                        <th>Emetropia</th>
+                        <th>Retinoblastoma</th>
+                        <th>Enucleated Eye</th>
+                        <th>Uvietis</th>
+                        <th>Orbital Tumor</th>
+                        <th>Retinopathy of Prematurity</th>
+                        <th>Retinal Detachment</th>
+                        <th>Ptosis</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-ophthalmologistList let-rowIndex="rowIndex">
                     <tr>
                         <td>{{ rowIndex + 1 }}</td>
                         <td>{{ ophthalmologistList.DistrictName }}</td>
-                        <td>{{ ophthalmologistList.SchoolName }}</td>
+                  
                   
                         <td (click)="this.StudentList(ophthalmologistList,'Physical  Assessment')">
                             {{ ophthalmologistList.TotalRetinitisPigmentosa }}
@@ -302,13 +345,28 @@
                         <td (click)="this.StudentList(ophthalmologistList,'Ophthalmologist  Assessment')">
                             {{ ophthalmologistList.TotalChalazion }}
                         </td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Ophthalmologist  Assessment')">
+                            {{ ophthalmologistList.TotalPterygeum }}
+                        </td>
                         <td (click)="this.StudentList(ophthalmologistList,'SpeechTherapist  Assessment')">
                             {{ ophthalmologistList.TotalSquint }}
                         </td>
                         <td (click)="this.StudentList(ophthalmologistList,'Ent  Assessment')">{{ ophthalmologistList.TotalVernalKeratoConjunctivitis }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalBlepharitis }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalAmblyopia }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalConjunctivitis }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalRedEye }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalBlephritis }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalCorneaOpacity }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalAbnormalFundalGlow }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalEmetropia }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalRetinoblastoma }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalEnucleatedEye }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalUvietis }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalOrbitalTumor }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalRetinopathyofPrematurity }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalRetinalDetachment }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalPtosis }}</td>
                         
                     
                     </tr>
@@ -336,7 +394,7 @@
                             Divisions <p-sortIcon field="name"></p-sortIcon>
                         </th> -->
                         <th>Districts</th>
-                        <th>Schools</th>                
+                            
                         <th> Speech and language disorders
                         </th>
                         <th>Stammering</th>
@@ -345,13 +403,20 @@
                         <th>Selective Mutism</th>
                         <th>Down syndrome</th>
                         <th>Hoarseness</th>
+                        <th>Dysarthia</th>
+                        <th>Dysphagia</th>
+                        <th>Vocalcordparalysis</th>
+                        <th>Puberphonia</th>
+                        <th>Stuttering</th>
+                        <th>ProtrudingTongue</th>
+                        
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-speechList let-rowIndex="rowIndex">
                     <tr>
                         <td>{{ rowIndex + 1 }}</td>
                         <td>{{ speechList.DistrictName }}</td>
-                        <td>{{ speechList.SchoolName }}</td>
+                     
                   
                         <td (click)="this.StudentList(speechList,'Physical  Assessment')">
                             {{ speechList.TotalSpeechandLanguageDisorders }}
@@ -368,6 +433,12 @@
                         <td (click)="this.StudentList(speechList,'Ent  Assessment')">{{ speechList.TotalSelectiveMutism }}</td>
                         <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalDownsyndrome }}</td>
                         <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalHoarseness }}</td>
+                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalDysarthia }}</td>
+                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalDysphagia }}</td>
+                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalVocalcordparalysis }}</td>
+                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalPuberphonia }}</td>
+                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalStuttering }}</td>
+                        <td (click)="this.StudentList(speechList,'Psychologist Assessment')">{{ speechList.TotalProtrudingTongue }}</td>
                    
                     </tr>
                 </ng-template>
@@ -393,14 +464,21 @@
                         <!-- <th>
                             Divisions <p-sortIcon field="name"></p-sortIcon>
                         </th> -->
-                        <th>Districts</th>
-                        <th>Schools</th>                
+                        <th>Districts</th>                             
                         <th>Otalgia</th>
                         <th>Ear Discharge</th>
                         <th>Microtia</th>
                         <th> Impacted Cerumen</th>
                         <th>AOM</th>
                         <th>CSOM</th>
+                        <th>Aural Atresia</th>
+                        <th>Tinnitus</th>
+                        <th>Foreignbody</th>
+                        <th>Perforated Tympanic Membrane</th>
+                        <th>OMwitheffusion</th>
+                        <th>Otomycosis</th>
+                        <th>Hearingloss</th>
+                        
                      
                     </tr>
                 </ng-template>
@@ -408,7 +486,7 @@
                     <tr>
                         <td>{{ rowIndex + 1 }}</td>
                         <td>{{ entList.DistrictName }}</td>
-                        <td>{{ entList.SchoolName }}</td>
+                      
                   
                         <td (click)="this.StudentList(entList,'Physical  Assessment')">
                             {{ entList.TotalOtalgia }}
@@ -424,6 +502,13 @@
                         </td>
                         <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalAOM }}</td>
                         <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalCSOM }}</td>
+                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalAuralAtresia }}</td>
+                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalTinnitus }}</td>
+                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalForeignbody }}</td>
+                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalPerforatedTympanicMembrane }}</td>
+                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalOMwitheffusion }}</td>
+                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalOtomycosis }}</td>
+                        <td (click)="this.StudentList(entList,'Ent  Assessment')">{{ entList.TotalHearingloss }}</td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -449,23 +534,25 @@
                             Divisions <p-sortIcon field="name"></p-sortIcon>
                         </th> -->
                         <th>Districts</th>
-                        <th>Schools</th>                
+                                   
                         <th>Macro cephalous</th>
                         <th> Down Syndrome
                         </th>
                         <th> Head Injury
                         </th>
                         <th>Neuro Development Disorder</th>
-                        <th>Intellectual Deficit</th>
-                        <th> Childhood Depression
+                        <th>Epilepsy</th>
+                        <th> Stroke
                         </th>
-                        <th>Children Anxiety
+                        <th>AustinSpectrumDisorder
                         </th>
-                        <th> Separation Anxiety
+                        <th> Attentiondeficit
                         </th>
-                        <th> Adjustment Disorder
+                        <th>ObsessiveCompulsiveDisorder
                         </th>
-                        <th> Stress
+                        <th> IntellectualDevelopmentalDisability
+                        </th>
+                        <th> AnyOther
                         </th>
                     </tr>
                 </ng-template>
@@ -473,7 +560,7 @@
                     <tr>
                         <td>{{ rowIndex + 1 }}</td>
                         <td>{{ mentalList.DistrictName }}</td>
-                        <td>{{ mentalList.SchoolName }}</td>
+      
                   
                         <td (click)="this.StudentList(mentalList,'Physical  Assessment')">
                             {{ mentalList.TotalMacrocephalous }}
@@ -487,13 +574,14 @@
                         <td (click)="this.StudentList(mentalList,'SpeechTherapist  Assessment')">
                             {{ mentalList.TotalNeuroDevelopmentDisorder }}
                         </td>
-                        <td (click)="this.StudentList(mentalList,'Ent  Assessment')">{{ mentalList.TotalIntellectualDeficit }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalIChildhoodDepression }}</td>
+                        <td (click)="this.StudentList(mentalList,'Ent  Assessment')">{{ mentalList.TotalEpilepsy }}</td>
+                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalStroke }}</td>
                     
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalChildrenAnxiety }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalSeparationAnxiety }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalAdjustmentDisorder }}</td>
-                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalStress }}</td>
+                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalAustinSpectrumDisorder }}</td>
+                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalAttentiondeficit }}</td>
+                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalObsessiveCompulsiveDisorder }}</td>
+                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalIntellectualDevelopmentalDisability }}</td>
+                        <td (click)="this.StudentList(mentalList,'Psychologist Assessment')">{{ mentalList.TotalAnyOther }}</td>
                    
                     </tr>
                 </ng-template>
