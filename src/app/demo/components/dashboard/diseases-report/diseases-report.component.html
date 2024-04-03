@@ -66,6 +66,23 @@
                 ></p-dropdown>
                 </div>
             </div>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="state"><b>Division</b></label>
+                    <!-- Select division -->
+                    <p-dropdown [disabled]="disableDivnDist" [options]="this.divisions"
+                        placeholder="{{ placeHolderDivision }}" (onChange)="dropdownValueChanged($event.value, 'Div')"
+                        optionLabel="NAME" [(ngModel)]="this.divisionsData"></p-dropdown>
+                </div>
+                <div class="field col-6 md:col-6">
+                    <label htmlFor="state"><b>District</b></label>
+                    <!-- Select district -->
+                    <p-dropdown [disabled]="disableDivnDist" [options]="this.districts"
+                        placeholder="{{ placeHolderDistrict }}" (onChange)="dropdownValueChanged($event.value, 'Dis')"
+                        optionLabel="NAME" [(ngModel)]="this.districtsData"></p-dropdown>
+                </div>
+                
+            </div>
                
             <form [formGroup]="DateForm" (ngSubmit)="SubmitSearch()" (keydown.enter)="$event.preventDefault()">
                 <div class="row flex align-items-center">
@@ -103,23 +120,7 @@
 <!-- Filters Cards -->
 <div class="col-12 lg:col-12 xl:col-12" >
     <div class="card w-100" *ngIf="this.LocationDropdown">
-        <div class="p-fluid p-formgrid grid">
-            <div class="field col-6 md:col-6">
-                <label htmlFor="state"><b>Division</b></label>
-                <!-- Select division -->
-                <p-dropdown [disabled]="disableDivnDist" [options]="this.divisions"
-                    placeholder="{{ placeHolderDivision }}" (onChange)="dropdownValueChanged($event.value, 'Div')"
-                    optionLabel="NAME" [(ngModel)]="this.divisionsData"></p-dropdown>
-            </div>
-            <div class="field col-6 md:col-6">
-                <label htmlFor="state"><b>District</b></label>
-                <!-- Select district -->
-                <p-dropdown [disabled]="disableDivnDist" [options]="this.districts"
-                    placeholder="{{ placeHolderDistrict }}" (onChange)="dropdownValueChanged($event.value, 'Dis')"
-                    optionLabel="NAME" [(ngModel)]="this.districtsData"></p-dropdown>
-            </div>
-            
-        </div>
+      
     </div>
     <!-- Filters Cards End -->
 
@@ -142,21 +143,28 @@
                         <th>Sr. #</th>                       
                         <th>Districts</th>                                    
                         <th> Acne</th>
+                      
                         <th> Burns</th>
                         <th> Dermatitis</th>
-                        <th> Eczema</th>
-                        <th> FungalInfection</th>
-                        <th>Hemangiomas</th>                     
-                        <th> HivesUrticaria</th>
+                        <th> Fungal Infection</th>
+                        <th>Eczema</th>                     
+                        <th>Fungal Infection</th>
+                        <th> Hives Urticaria</th>
                         <th> Impetigo</th>
                         <th> Liceinfestation</th>
-                        <th> PigmentationDisorderVitiligo</th>
-                        <th> PressuresoresDecubitussores</th>
-                        <th> Psoriasis</th>
+                        <th>Pigmentation DisorderVitiligo</th>
+                        <th> Pressuresores Decubitussores</th>
+                        <th>Psoriasis</th>
                         <th> Scabies</th>
                         <th> Xerosis</th>
+                        <th> HerpesandViralinfection</th>
+                        <th> Cellulitis</th>
+                        <th> DiaperRash</th>
+                        <th> Warts</th>
+                        <th> Keloidcars</th>
+                        <th> Chickenpox</th>
+                        <th> Measles</th>
                         <th> AnyOther</th>
-                    
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-physicalList let-rowIndex="rowIndex">
@@ -167,6 +175,7 @@
                         <td (click)="this.StudentList(physicalList,'Physical  Assessment')">
                             {{ physicalList.TotalAcne }}
                         </td>
+                        
                         <td (click)="this.StudentList(physicalList,'Dental  Assessment')">
                             {{ physicalList.TotalBurns }}
                         </td>
@@ -186,7 +195,18 @@
                         <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalPsoriasis }}</td>
                         <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalScabies }}</td>
                         <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalXerosis }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalHerpesandViralinfection }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalCellulitis }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalDiaperRash }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalWarts}}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalKeloidcars }}</td>
+                        <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalMeasles }}</td>
+
                         <td (click)="this.StudentList(physicalList,'Ent  Assessment')">{{ physicalList.TotalAnyOther }}</td>
+                        <td (click)="this.StudentList(physicalList,'Physical  Assessment')">
+                            {{ physicalList.TotalAnyOther }}
+                        </td>
+                    
                     </tr>
                 </ng-template>
             </p-table>
@@ -213,6 +233,7 @@
                         </th> -->
                         <th>Districts</th>                                
                         <th>Jaw Deformity</th>
+                        <th>Caries</th>
                         <th>Toothache</th>
                         <th>Gingivitis</th>
                         <th>Periodontitis</th>
@@ -231,6 +252,7 @@
                         <th>Attrition</th>
                         <th>Erosion</th>
                         <th>Abrasion</th>
+                        <th>Dental Sensitivity</th>
                         <th>TongueTie</th>
                         <th>Macroglossia</th>
                    
@@ -243,6 +265,9 @@
                   
                         <td (click)="this.StudentList(dentalList,'Physical  Assessment')">
                             {{ dentalList.TotalJawDeformity }}
+                        </td>
+                        <td (click)="this.StudentList(dentalList,'Physical  Assessment')">
+                            {{ dentalList.TotalCaries }}
                         </td>
                         <td (click)="this.StudentList(dentalList,'Dental  Assessment')">
                             {{ dentalList.TotalToothache }}
@@ -276,6 +301,7 @@
                         <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalAttrition }}</td>
                         <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalErosion }}</td>
                         <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalAbrasion }}</td>
+                        <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalDentalSensitivity }}</td>
                         <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalTongueTie }}</td>
                         <td (click)="this.StudentList(dentalList,'Psychologist Assessment')">{{ dentalList.TotalMacroglossia }}</td>
                   
@@ -305,11 +331,14 @@
                             Divisions <p-sortIcon field="name"></p-sortIcon>
                         </th> -->
                         <th>Districts</th>
+                        <th>TotalCataract</th>
                               
                         <th>Retinitis Pigmentosa</th>
                         <th>Glaucoma</th>
                         <th>Chalazion</th>
+                        <th>TotalStye</th>
                         <th>Pterygeum</th>
+                        
                         <th>Squint</th>
                         <th> Vernal Kerato Conjunctivitis
                         </th>
@@ -318,6 +347,7 @@
                         <th>Conjunctivitis</th>
                         <th>Red Eye</th>
                         <th>Blephritis</th>
+                        <th>TotalVKC</th>
                         <th>Cornea Opacity</th>
                         <th>Abnormal Fundal Glow</th>
                         <th>Emetropia</th>
@@ -337,6 +367,9 @@
                   
                   
                         <td (click)="this.StudentList(ophthalmologistList,'Physical  Assessment')">
+                            {{ ophthalmologistList.TotalCataract }}
+                        </td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Physical  Assessment')">
                             {{ ophthalmologistList.TotalRetinitisPigmentosa }}
                         </td>
                         <td (click)="this.StudentList(ophthalmologistList,'Dental  Assessment')">
@@ -344,6 +377,9 @@
                         </td>
                         <td (click)="this.StudentList(ophthalmologistList,'Ophthalmologist  Assessment')">
                             {{ ophthalmologistList.TotalChalazion }}
+                        </td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Ophthalmologist  Assessment')">
+                            {{ ophthalmologistList.TotalStye }}
                         </td>
                         <td (click)="this.StudentList(ophthalmologistList,'Ophthalmologist  Assessment')">
                             {{ ophthalmologistList.TotalPterygeum }}
@@ -357,6 +393,7 @@
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalConjunctivitis }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalRedEye }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalBlephritis }}</td>
+                        <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalVKC }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalCorneaOpacity }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalAbnormalFundalGlow }}</td>
                         <td (click)="this.StudentList(ophthalmologistList,'Psychologist Assessment')">{{ ophthalmologistList.TotalEmetropia }}</td>
